@@ -1,19 +1,15 @@
-import { Component, Injectable } from '@angular/core';
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
+import { of } from 'rxjs';
+
 import {
+  FeatureFlag,
   FeatureFlagDirective,
   FeatureFlagService,
   FEATURE_FLAG_SERVICE,
 } from '../public-api';
-
-@Injectable()
-class DummyService implements FeatureFlagService {
-  isEnabled() {
-    return true;
-  }
-}
 
 @Component({
   template: `
@@ -27,16 +23,26 @@ class DummyService implements FeatureFlagService {
   `,
 })
 class HostComponent {
-  flag?: string | string[];
+  flag?: FeatureFlag = 'some flag';
 }
 
 describe(FeatureFlagDirective.name, () => {
   let fixture: ComponentFixture<HostComponent>;
+  let featureFlagServiceMock: jasmine.SpyObj<FeatureFlagService>;
 
   beforeEach(async () => {
+    featureFlagServiceMock = jasmine.createSpyObj<FeatureFlagService>(
+      'FeatureFlagService',
+      {
+        isEnabled: true,
+      }
+    );
+
     await TestBed.configureTestingModule({
       declarations: [HostComponent],
-      providers: [{ provide: FEATURE_FLAG_SERVICE, useClass: DummyService }],
+      providers: [
+        { provide: FEATURE_FLAG_SERVICE, useValue: featureFlagServiceMock },
+      ],
       imports: [FeatureFlagDirective],
     }).compileComponents();
   });
@@ -106,6 +112,170 @@ describe(FeatureFlagDirective.name, () => {
         .then(() => {
           expect(directive.featureFlag).toEqual(['some', 'flag']);
         });
+    });
+  });
+
+  describe('Feature flag enabled', () => {
+    describe('with boolean', () => {
+      it('should render the feature template', async () => {
+        featureFlagServiceMock.isEnabled.and.returnValue(true);
+
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        const featureEnabledElement = fixture.debugElement.query(
+          By.css('#feature-enabled')
+        );
+        expect(featureEnabledElement).toBeTruthy();
+      });
+
+      it('should not render the fallback template', async () => {
+        featureFlagServiceMock.isEnabled.and.returnValue(true);
+
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        const featureDisabledElement = fixture.debugElement.query(
+          By.css('#feature-disabled')
+        );
+        expect(featureDisabledElement).toBeFalsy();
+      });
+    });
+
+    describe('with Promise<bool>', () => {
+      it('should render the feature template if the feature flag is enabled', async () => {
+        featureFlagServiceMock.isEnabled.and.returnValue(Promise.resolve(true));
+
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        const featureEnabledElement = fixture.debugElement.query(
+          By.css('#feature-enabled')
+        );
+        expect(featureEnabledElement).toBeTruthy();
+      });
+
+      it('should not render the fallback template', async () => {
+        featureFlagServiceMock.isEnabled.and.returnValue(Promise.resolve(true));
+
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        const featureDisabledElement = fixture.debugElement.query(
+          By.css('#feature-disabled')
+        );
+        expect(featureDisabledElement).toBeFalsy();
+      });
+    });
+
+    describe('with Observable<boolean>', () => {
+      it('should render the feature template if the feature flag is enabled', async () => {
+        featureFlagServiceMock.isEnabled.and.returnValue(of(true));
+
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        const featureEnabledElement = fixture.debugElement.query(
+          By.css('#feature-enabled')
+        );
+        expect(featureEnabledElement).toBeTruthy();
+      });
+
+      it('should not render the fallback template', async () => {
+        featureFlagServiceMock.isEnabled.and.returnValue(of(true));
+
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        const featureDisabledElement = fixture.debugElement.query(
+          By.css('#feature-disabled')
+        );
+        expect(featureDisabledElement).toBeFalsy();
+      });
+    });
+  });
+
+  describe('Feature flag disabled', () => {
+    describe('with boolean', () => {
+      it('should not render the feature template', async () => {
+        featureFlagServiceMock.isEnabled.and.returnValue(false);
+
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        const featureEnabledElement = fixture.debugElement.query(
+          By.css('#feature-enabled')
+        );
+        expect(featureEnabledElement).toBeFalsy();
+      });
+
+      it('should render the fallback template', async () => {
+        featureFlagServiceMock.isEnabled.and.returnValue(false);
+
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        const featureDisabledElement = fixture.debugElement.query(
+          By.css('#feature-disabled')
+        );
+        expect(featureDisabledElement).toBeTruthy();
+      });
+    });
+
+    describe('with Promise<bool>', () => {
+      it('should not render the feature template', async () => {
+        featureFlagServiceMock.isEnabled.and.returnValue(
+          Promise.resolve(false)
+        );
+
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        const featureEnabledElement = fixture.debugElement.query(
+          By.css('#feature-enabled')
+        );
+        expect(featureEnabledElement).toBeFalsy();
+      });
+
+      it('should render the fallback template', async () => {
+        featureFlagServiceMock.isEnabled.and.returnValue(
+          Promise.resolve(false)
+        );
+
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        const featureDisabledElement = fixture.debugElement.query(
+          By.css('#feature-disabled')
+        );
+        expect(featureDisabledElement).toBeTruthy();
+      });
+    });
+
+    describe('with Observable<boolean>', () => {
+      it('should not render the feature template', async () => {
+        featureFlagServiceMock.isEnabled.and.returnValue(of(false));
+
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        const featureEnabledElement = fixture.debugElement.query(
+          By.css('#feature-enabled')
+        );
+        expect(featureEnabledElement).toBeFalsy();
+      });
+
+      it('should render the fallback template', async () => {
+        featureFlagServiceMock.isEnabled.and.returnValue(of(false));
+
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        const featureDisabledElement = fixture.debugElement.query(
+          By.css('#feature-disabled')
+        );
+        expect(featureDisabledElement).toBeTruthy();
+      });
     });
   });
 });
