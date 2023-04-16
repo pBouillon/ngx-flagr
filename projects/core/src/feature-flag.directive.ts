@@ -3,9 +3,12 @@ import {
   inject,
   Input,
   OnInit,
+  OnDestroy,
   TemplateRef,
   ViewContainerRef,
 } from '@angular/core';
+
+import { Subject, takeUntil } from 'rxjs';
 
 import { FeatureFlag } from './feature-flag.service';
 import { FEATURE_FLAG_SERVICE } from './tokens';
@@ -14,10 +17,11 @@ import { FEATURE_FLAG_SERVICE } from './tokens';
   selector: '[featureFlag]',
   standalone: true,
 })
-export class FeatureFlagDirective implements OnInit {
+export class FeatureFlagDirective implements OnInit, OnDestroy {
   @Input() featureFlag!: FeatureFlag;
   @Input() featureFlagElse?: TemplateRef<unknown>;
 
+  private readonly _destroyed$ = new Subject<void>();
   private readonly _featureFlagService = inject(FEATURE_FLAG_SERVICE);
   private readonly _templateRef = inject(TemplateRef<unknown>);
   private readonly _viewContainerRef = inject(ViewContainerRef);
@@ -34,6 +38,11 @@ export class FeatureFlagDirective implements OnInit {
     }
 
     await this.renderTemplate();
+  }
+
+  ngOnDestroy(): void {
+    this._destroyed$.next();
+    this._destroyed$.complete();
   }
 
   private async renderTemplate(): Promise<void> {
@@ -59,7 +68,7 @@ export class FeatureFlagDirective implements OnInit {
     }
 
     return new Promise<boolean>((resolve, reject) => {
-      isEnabled.subscribe({
+      isEnabled.pipe(takeUntil(this._destroyed$)).subscribe({
         next: value => resolve(value),
         error: error => reject(error),
         complete: () =>
