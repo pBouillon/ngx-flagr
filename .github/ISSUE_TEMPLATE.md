@@ -4,11 +4,13 @@
 
 ## Category
 
+```text
 - [ ] Bug report
 - [ ] Regression
 - [ ] Feature suggestion
 - [ ] Documentation issue
 - [ ] Other
+```
 
 ## Expected Behavior
 
