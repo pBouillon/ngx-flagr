@@ -1,20 +1,22 @@
 {
   "name": "@ngx-flagr/core",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "An Angular library providing directives, services and more to ease the usage of feature flags in Angular",
   "keywords": [
     "Angular",
     "feature flags",
-    "A/B testing"
+    "A/B testing",
+    "ngx-flagr"
   ],
   "author": {
     "name": "Pierre Bouillon",
     "url": "https://github.com/pbouillon"
   },
+  "contributors": [],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pbouillon/ngx-flagr.git"
+    "url": "git+https://github.com/pbouillon/ngx-flagr.git"
   },
   "bugs": {
     "url": "https://github.com/pbouillon/ngx-flagr/issues"
