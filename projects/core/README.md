@@ -1,9 +1,3 @@
 # @ngx-flagr/core
 
-Sources for the core components of the `@ngx-flagr` library
-
-It includes:
-
-- The [`featureFlag`](./src/feature-flag.directive.ts) directive
-- The [`FeatureFlagService`](./src/feature-flag.service.ts) abstractions
-- The [`provideNgxFlagr`](./src/provide-ngx-flagr.ts) provider
+Sources for the core components of [`@ngx-flagr`](https://github.com/pBouillon/ngx-flagr).
