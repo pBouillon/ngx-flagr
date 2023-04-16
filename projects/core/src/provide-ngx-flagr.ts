@@ -9,6 +9,25 @@ import {
   FEATURE_FLAG_SERVICE,
 } from './tokens';
 
+/**
+ * Provides the ngx-flagr dependencies.
+ *
+ * @param {NgxFlagrOptions} options - The options to configure the dependencies.
+ * @returns The dependencies for ngx-flagr.
+ *
+ * @usageNotes
+ * Use this function to provide the dependencies for ngx-flagr in your application. You can configure the feature flag service implementation, and the initial configuration for the library.
+ *
+ * ### Providing a custom `FeatureFlagService`
+ *
+ * ```ts
+ * bootstrapApplication(AppComponent, {
+ *   providers: [provideNgxFlagr({ featureFlagService: CustomFeatureFlagService })],
+ * });
+ * ```
+ *
+ * @publicApi
+ */
 export function provideNgxFlagr(
   options: NgxFlagrOptions
 ): EnvironmentProviders {
