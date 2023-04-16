@@ -1,6 +1,9 @@
 # @ngx-flagr
 
-`ngx-flagr` is an Angular library for managing feature flags.
+[![CI](https://github.com/pBouillon/ngx-flagr/actions/workflows/ci.yml/badge.svg)](https://github.com/pBouillon/ngx-flagr/actions/workflows/ci.yml) [![GitHub discussions](https://img.shields.io/github/discussions/pbouillon/ngx-flagr?logo=github)](https://github.com/pbouillon/ngx-flagr/discussions) [![npm](https://img.shields.io/npm/v/@ngx-flagr/core.svg)](https://www.npmjs.com/package/@ngx-flagr/core) [![npm](https://img.shields.io/npm/dt/@ngx-flagr/core)](https://www.npmjs.com/package/@ngx-flagr/core)
+
+
+> 🚩 Effortless feature flag management in Angular 
 
 With `ngx-flagr`, you can easily manage feature flags, target specific users or segments, and experiment with different variations of your app's features.
 
