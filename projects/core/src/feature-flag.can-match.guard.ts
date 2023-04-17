@@ -13,8 +13,11 @@ export const canMatchFeatureFlag: CanMatchFn = (
   | Promise<boolean | UrlTree>
   | boolean
   | UrlTree => {
-  const { routeDataFeatureFlagKey } = inject(CONFIGURATION);
-  const featureFlag = route.data?.[routeDataFeatureFlagKey];
+  const {
+    routing: { featureFlagKey },
+  } = inject(CONFIGURATION);
+
+  const featureFlag = route.data?.[featureFlagKey];
 
   if (!featureFlag) {
     console.error(`Route ${route.path} does not have a feature flag specified`);
@@ -22,11 +25,9 @@ export const canMatchFeatureFlag: CanMatchFn = (
   }
 
   if (!isFeatureFlag(featureFlag)) {
-    console.error(
+    throw new Error(
       `Route ${route.path} has an invalid feature flag: ${featureFlag}`
     );
-    // TODO - Configure behavior
-    return false;
   }
 
   return inject(FEATURE_FLAG_SERVICE).isEnabled(featureFlag);

@@ -15,17 +15,19 @@ export interface NgxFlagrConfiguration {
     | Type<FeatureFlagService>
     | (() => Type<FeatureFlagService>);
 
-  /**
-   * The key used to identify feature flags in the `data` property of Angular
-   * routes.
-   *
-   * @default 'featureFlag'
-   *
-   * @remarks
-   * This property is used to identify which property in the `data` object of an
-   * Angular route contains the feature flag for that route.
-   */
-  routeDataFeatureFlagKey: string;
+  routing: {
+    /**
+     * The key used to identify feature flags in the `data` property of Angular
+     * routes.
+     *
+     * @default 'featureFlag'
+     *
+     * @remarks
+     * This property is used to identify which property in the `data` object of an
+     * Angular route contains the feature flag for that route.
+     */
+    featureFlagKey: string;
+  };
 }
 
 export type NgxFlagrPartialConfig = Partial<NgxFlagrConfiguration> &
@@ -42,7 +44,9 @@ export function createConfiguration(
     NgxFlagrConfiguration,
     'featureFlagService'
   > = {
-    routeDataFeatureFlagKey: 'featureFlag',
+    routing: {
+      featureFlagKey: 'featureFlag',
+    },
   };
 
   const options =
