@@ -4,7 +4,7 @@ import { CanMatchFn, Route, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { isFeatureFlag } from './feature-flag';
-import { FEATURE_FLAG_SERVICE } from './tokens';
+import { CONFIGURATION, FEATURE_FLAG_SERVICE } from './tokens';
 
 export const canMatchFeatureFlag: CanMatchFn = (
   route: Route
@@ -13,7 +13,8 @@ export const canMatchFeatureFlag: CanMatchFn = (
   | Promise<boolean | UrlTree>
   | boolean
   | UrlTree => {
-  const featureFlag = route.data?.['featureFlag'];
+  const { routeDataFeatureFlagKey } = inject(CONFIGURATION);
+  const featureFlag = route.data?.[routeDataFeatureFlagKey];
 
   if (!featureFlag) {
     console.error(`Route ${route.path} does not have a feature flag specified`);
@@ -24,6 +25,7 @@ export const canMatchFeatureFlag: CanMatchFn = (
     console.error(
       `Route ${route.path} has an invalid feature flag: ${featureFlag}`
     );
+    // TODO - Configure behavior
     return false;
   }
 
