@@ -27,6 +27,18 @@ export interface NgxFlagrConfiguration {
      * Angular route contains the feature flag for that route.
      */
     featureFlagKey: string;
+
+    /**
+     * The value returned by the guard when no feature flags are defined for a route.
+     *
+     * @default false
+     *
+     * @remarks
+     * If this property is set to `true`, the guard will allow access to routes that don't have any
+     * feature flags defined in their `data` property. If set to `false`, the guard will deny access to
+     * such routes.
+     */
+    validIfNone: boolean;
   };
 }
 
@@ -46,6 +58,7 @@ export function createConfiguration(
   > = {
     routing: {
       featureFlagKey: 'featureFlag',
+      validIfNone: false,
     },
   };
 
