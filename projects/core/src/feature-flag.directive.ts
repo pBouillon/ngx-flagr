@@ -46,7 +46,7 @@ import { FEATURE_FLAG_SERVICE } from './tokens';
  * ### With a fallback
  *
  * ```html
- * <div *featureFlag="'my-feature'">
+ * <div *featureFlag="'my-feature'; else disabledContent">
  *   This content will only be rendered if the 'my-feature' feature flag is enabled.
  * </div>
  *
