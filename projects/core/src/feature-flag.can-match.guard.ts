@@ -1,7 +1,7 @@
 import { inject, isDevMode } from '@angular/core';
-import { CanMatchFn, Route, UrlTree } from '@angular/router';
+import { CanMatchFn, Route, Router, UrlTree } from '@angular/router';
 
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 import { isFeatureFlag } from './feature-flag';
 import { CONFIGURATION, FEATURE_FLAG_SERVICE } from './tokens';
@@ -20,11 +20,15 @@ import { CONFIGURATION, FEATURE_FLAG_SERVICE } from './tokens';
  */
 export const canMatchFeatureFlag: CanMatchFn = (
   route: Route
-): Observable<boolean> | Promise<boolean> | boolean => {
+):
+  | Observable<boolean | UrlTree>
+  | Promise<boolean | UrlTree>
+  | boolean
+  | UrlTree => {
   const { routing } = inject(CONFIGURATION);
 
-  const { featureFlagKey } = routing;
-  const featureFlag = route.data?.[featureFlagKey];
+  const { key } = routing;
+  const featureFlag = route.data?.[key];
 
   if (!featureFlag) {
     const { validIfNone } = routing;
@@ -43,5 +47,24 @@ export const canMatchFeatureFlag: CanMatchFn = (
     );
   }
 
-  return inject(FEATURE_FLAG_SERVICE).isEnabled(featureFlag);
+  const isEnabled = inject(FEATURE_FLAG_SERVICE).isEnabled(featureFlag);
+
+  const { redirectToIfDisabled } = routing;
+  if (redirectToIfDisabled === null) {
+    return isEnabled;
+  }
+
+  const redirectTo = inject(Router).parseUrl(redirectToIfDisabled);
+
+  if (typeof isEnabled === 'boolean') {
+    return isEnabled || redirectTo;
+  }
+
+  if (isEnabled instanceof Promise) {
+    return isEnabled.then(result => result || redirectTo);
+  } else if (isEnabled instanceof Observable) {
+    return isEnabled.pipe(map(result => result || redirectTo));
+  }
+
+  throw new Error('Unhandled return type of `FeatureFlagService#isEnabled`');
 };

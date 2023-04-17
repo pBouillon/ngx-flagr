@@ -15,6 +15,9 @@ export interface NgxFlagrConfiguration {
     | Type<FeatureFlagService>
     | (() => Type<FeatureFlagService>);
 
+  /**
+   * Routing options for feature flags.
+   */
   routing: {
     /**
      * The key used to identify feature flags in the `data` property of Angular
@@ -26,7 +29,20 @@ export interface NgxFlagrConfiguration {
      * This property is used to identify which property in the `data` object of an
      * Angular route contains the feature flag for that route.
      */
-    featureFlagKey: string;
+    key: string;
+
+    /**
+     * The name of a route to redirect to if the user does not have the feature
+     * flag enabled.
+     *
+     * @default null
+     *
+     * @remarks
+     * If this property is set, and the feature flag for a route is disabled,
+     * the user will be redirected to the route with this name. If it is not
+     * set, the user will be denied access to the route.
+     */
+    redirectToIfDisabled: string | null;
 
     /**
      * The value returned by the guard when no feature flags are defined for a route.
@@ -57,7 +73,8 @@ export function createConfiguration(
     'featureFlagService'
   > = {
     routing: {
-      featureFlagKey: 'featureFlag',
+      key: 'featureFlag',
+      redirectToIfDisabled: null,
       validIfNone: false,
     },
   };
