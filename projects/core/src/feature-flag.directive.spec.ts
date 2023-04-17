@@ -52,7 +52,7 @@ describe(FeatureFlagDirective.name, () => {
   });
 
   describe('OnInit', () => {
-    it('should throw an error if featureFlag is not provided', async () => {
+    it('throw an error if featureFlag is not provided', async () => {
       fixture.componentInstance.flag = undefined;
 
       const directive: FeatureFlagDirective = fixture.debugElement
@@ -67,7 +67,7 @@ describe(FeatureFlagDirective.name, () => {
       );
     });
 
-    it('should not throw an error if featureFlag is provided as a string', async () => {
+    it('not throw an error if featureFlag is provided as a string', async () => {
       fixture.componentInstance.flag = 'some flag';
 
       const directive: FeatureFlagDirective = fixture.debugElement
@@ -83,7 +83,7 @@ describe(FeatureFlagDirective.name, () => {
         });
     });
 
-    it('should throw an error if featureFlag is an empty array', async () => {
+    it('throw an error if featureFlag is an empty array', async () => {
       fixture.componentInstance.flag = [];
 
       const directive: FeatureFlagDirective = fixture.debugElement
@@ -98,7 +98,7 @@ describe(FeatureFlagDirective.name, () => {
       );
     });
 
-    it('should not throw an error if featureFlag is a non-empty array', async () => {
+    it('not throw an error if featureFlag is a non-empty array', async () => {
       fixture.componentInstance.flag = ['some', 'flag'];
 
       const directive: FeatureFlagDirective = fixture.debugElement
@@ -117,7 +117,7 @@ describe(FeatureFlagDirective.name, () => {
 
   describe('Feature flag enabled', () => {
     describe('with boolean', () => {
-      it('should render the feature template', async () => {
+      it('render the feature template', async () => {
         featureFlagServiceMock.isEnabled.and.returnValue(true);
 
         fixture.detectChanges();
@@ -129,7 +129,7 @@ describe(FeatureFlagDirective.name, () => {
         expect(featureEnabledElement).toBeTruthy();
       });
 
-      it('should not render the fallback template', async () => {
+      it('not render the fallback template', async () => {
         featureFlagServiceMock.isEnabled.and.returnValue(true);
 
         fixture.detectChanges();
@@ -143,7 +143,7 @@ describe(FeatureFlagDirective.name, () => {
     });
 
     describe('with Promise<bool>', () => {
-      it('should render the feature template if the feature flag is enabled', async () => {
+      it('render the feature template if the feature flag is enabled', async () => {
         featureFlagServiceMock.isEnabled.and.returnValue(Promise.resolve(true));
 
         fixture.detectChanges();
@@ -155,7 +155,7 @@ describe(FeatureFlagDirective.name, () => {
         expect(featureEnabledElement).toBeTruthy();
       });
 
-      it('should not render the fallback template', async () => {
+      it('not render the fallback template', async () => {
         featureFlagServiceMock.isEnabled.and.returnValue(Promise.resolve(true));
 
         fixture.detectChanges();
@@ -169,7 +169,7 @@ describe(FeatureFlagDirective.name, () => {
     });
 
     describe('with Observable<boolean>', () => {
-      it('should render the feature template if the feature flag is enabled', async () => {
+      it('render the feature template if the feature flag is enabled', async () => {
         featureFlagServiceMock.isEnabled.and.returnValue(of(true));
 
         fixture.detectChanges();
@@ -181,7 +181,7 @@ describe(FeatureFlagDirective.name, () => {
         expect(featureEnabledElement).toBeTruthy();
       });
 
-      it('should not render the fallback template', async () => {
+      it('not render the fallback template', async () => {
         featureFlagServiceMock.isEnabled.and.returnValue(of(true));
 
         fixture.detectChanges();
@@ -197,7 +197,7 @@ describe(FeatureFlagDirective.name, () => {
 
   describe('Feature flag disabled', () => {
     describe('with boolean', () => {
-      it('should not render the feature template', async () => {
+      it('not render the feature template', async () => {
         featureFlagServiceMock.isEnabled.and.returnValue(false);
 
         fixture.detectChanges();
@@ -209,7 +209,7 @@ describe(FeatureFlagDirective.name, () => {
         expect(featureEnabledElement).toBeFalsy();
       });
 
-      it('should render the fallback template', async () => {
+      it('render the fallback template', async () => {
         featureFlagServiceMock.isEnabled.and.returnValue(false);
 
         fixture.detectChanges();
@@ -223,7 +223,7 @@ describe(FeatureFlagDirective.name, () => {
     });
 
     describe('with Promise<bool>', () => {
-      it('should not render the feature template', async () => {
+      it('not render the feature template', async () => {
         featureFlagServiceMock.isEnabled.and.returnValue(
           Promise.resolve(false)
         );
@@ -237,7 +237,7 @@ describe(FeatureFlagDirective.name, () => {
         expect(featureEnabledElement).toBeFalsy();
       });
 
-      it('should render the fallback template', async () => {
+      it('render the fallback template', async () => {
         featureFlagServiceMock.isEnabled.and.returnValue(
           Promise.resolve(false)
         );
@@ -253,7 +253,7 @@ describe(FeatureFlagDirective.name, () => {
     });
 
     describe('with Observable<boolean>', () => {
-      it('should not render the feature template', async () => {
+      it('not render the feature template', async () => {
         featureFlagServiceMock.isEnabled.and.returnValue(of(false));
 
         fixture.detectChanges();
@@ -265,7 +265,7 @@ describe(FeatureFlagDirective.name, () => {
         expect(featureEnabledElement).toBeFalsy();
       });
 
-      it('should render the fallback template', async () => {
+      it('render the fallback template', async () => {
         featureFlagServiceMock.isEnabled.and.returnValue(of(false));
 
         fixture.detectChanges();
