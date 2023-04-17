@@ -27,8 +27,8 @@ export const canMatchFeatureFlag: CanMatchFn = (
   | UrlTree => {
   const { routing } = inject(CONFIGURATION);
 
-  const { key } = routing;
-  const featureFlag = route.data?.[key];
+  const { keys } = routing;
+  const featureFlag = route.data?.[keys.featureFlag];
 
   if (!featureFlag) {
     const { validIfNone } = routing;
@@ -49,8 +49,12 @@ export const canMatchFeatureFlag: CanMatchFn = (
 
   const isEnabled = inject(FEATURE_FLAG_SERVICE).isEnabled(featureFlag);
 
-  const { redirectToIfDisabled } = routing;
-  if (redirectToIfDisabled === null) {
+  // Takes the redirection URL defined on the route level or on the
+  // configuration-level
+  let redirectToIfDisabled =
+    route.data?.[keys.redirectToIfDisabled] || routing.redirectToIfDisabled;
+
+  if (!redirectToIfDisabled) {
     return isEnabled;
   }
 
