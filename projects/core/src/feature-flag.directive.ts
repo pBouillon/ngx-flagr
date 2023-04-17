@@ -10,7 +10,8 @@ import {
 
 import { Subject, takeUntil } from 'rxjs';
 
-import { FeatureFlag, FeatureFlagService } from './feature-flag.service';
+import { FeatureFlag } from './feature-flag';
+import { FeatureFlagService } from './feature-flag.service';
 import { FEATURE_FLAG_SERVICE } from './tokens';
 
 /**
