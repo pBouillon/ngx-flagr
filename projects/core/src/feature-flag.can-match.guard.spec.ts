@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { UrlTree } from '@angular/router';
+import { Route, UrlTree } from '@angular/router';
 
 import { canMatchFeatureFlag } from './feature-flag.can-match.guard';
 import { FeatureFlagService } from './feature-flag.service';
@@ -13,6 +13,27 @@ describe('canMatchFeatureFlag', () => {
       'FeatureFlagService',
       ['isEnabled']
     );
+  });
+
+  it('reject invalid feature flags', () => {
+    TestBed.configureTestingModule({
+      providers: [
+        { provide: FEATURE_FLAG_SERVICE, useValue: featureFlagServiceMock },
+        {
+          provide: CONFIGURATION,
+          useValue: {
+            routing: {
+              keys: { featureFlag: 'featureFlag' },
+            },
+          },
+        },
+      ],
+    }).runInInjectionContext(() => {
+      const route: Route = { path: 'my-route', data: { featureFlag: 1337 } };
+      expect(() => canMatchFeatureFlag(route, [])).toThrowError(
+        'Route my-route has an invalid feature flag: 1337'
+      );
+    });
   });
 
   it('reject navigation if the feature flag is not enabled', () => {
