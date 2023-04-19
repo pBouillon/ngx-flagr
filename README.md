@@ -12,10 +12,15 @@ With `ngx-flagr`, you can easily manage feature flags, target specific users or 
   - [Register the service](#register-the-service)
 - [Usage](#usage)
   - [`featureFlag` directive](#featureflag-directive)
-    - [Examples](#examples)
-      - [With a single flag](#with-a-single-flag)
-      - [With multiple flags](#with-multiple-flags)
-      - [With a fallback](#with-a-fallback)
+    - [With a single flag](#with-a-single-flag)
+    - [With multiple flags](#with-multiple-flags)
+    - [With a fallback](#with-a-fallback)
+  - [The `canMatchFeatureFlag` functional guard](#the-canmatchfeatureflag-functional-guard)
+    - [Configuration](#configuration)
+    - [With feature flags](#with-feature-flags)
+    - [With a fallback route](#with-a-fallback-route)
+    - [With a passthrough](#with-a-passthrough)
+    - [With a global redirection target](#with-a-global-redirection-target)
 - [License](#license)
 
 ## Installation
@@ -72,9 +77,7 @@ bootstrapApplication(AppComponent, {
 
 The `featureFlag` directive takes a `FeatureFlag` for input that is either a `string` or a `string[]`. It then conditionally renders the content of your template based on the evaluation of the parameter by the provided `FeatureFlagService`.
 
-#### Examples
-
-##### With a single flag
+#### With a single flag
 
 ```html
 <div *featureFlag="'my-feature'">
@@ -82,7 +85,7 @@ The `featureFlag` directive takes a `FeatureFlag` for input that is either a `st
 </div>
 ```
 
-##### With multiple flags
+#### With multiple flags
 
 ```html
 <div *featureFlag="['my', 'feature']">
@@ -90,7 +93,7 @@ The `featureFlag` directive takes a `FeatureFlag` for input that is either a `st
 </div>
 ```
 
-##### With a fallback
+#### With a fallback
 
 ```html
 <div *featureFlag="'my-feature'; else disabledContent">
@@ -100,6 +103,120 @@ The `featureFlag` directive takes a `FeatureFlag` for input that is either a `st
 <ng-template #disabledContent>
   This content will be rendered when the 'my-feature' feature flag is disabled.
 </ng-template>
+```
+
+### The `canMatchFeatureFlag` functional guard
+
+`ngx-flagr` also provides a functional guard to control your routes resolution.
+
+When used, it will check for the feature flags provided on the route level and
+will evaluate whether they are enabled or not based on your implementation of
+the `FeatureFlagService`.
+
+Behavior can be configured within `provideNgxFlagr`.
+
+#### Configuration
+
+Several options are available to configure the desired behavior of the guard:
+
+```ts
+provideNgxFlagr({
+  // ...
+
+  // Optional configuration section
+  routing: {
+    // The keys used to retrieve values in the `data` section of the `Route`
+    keys: {
+      // The key where the feature flags will be defined
+      featureFlag: 'featureFlag',
+      // The key to the route the user will be redirected to if the guard
+      // resolution fails
+      redirectToIfDisabled: 'redirectToIfDisabled',
+    },
+
+    // The default redirection if the guard fails and no other route is defined
+    // at the route-level
+    redirectToIfDisabled: null,
+    // Whether the guard should let pass through routes that invokes it but
+    // without providing feature flags
+    validIfNone: false,
+  },
+});
+```
+
+On your routes, simply provide the guard in the `canMatch` array.
+
+#### With feature flags
+
+```ts
+const routes: Route[] = [
+  {
+    path: 'fast-delivery',
+    component: FastDeliveryComponent,
+    canMatch: canMatchFeatureFlag,
+    data: { featureFlag: 'fast-delivery' }
+  },
+];
+```
+
+#### With a fallback route
+
+```ts
+const routes: Route[] = [
+  {
+    path: 'fast-delivery',
+    component: FastDeliveryComponent,
+    canMatch: canMatchFeatureFlag,
+    data: {
+      featureFlags: 'fast-delivery',
+      redirectToIfDisabled: 'delivery',
+    }
+  },
+];
+```
+
+#### As a passthrough when no flags are provided
+
+```ts
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideNgxFlagr({
+      featureFlagService: CustomFeatureFlagService,
+      routing: { validIfNone: true }
+    })
+  ],
+});
+
+const routes: Route[] = [
+  {
+    path: 'fast-delivery',
+    component: FastDeliveryComponent,
+    canMatch: canMatchFeatureFlag,
+    data: { }
+  },
+];
+```
+
+#### With a global redirection target
+
+```ts
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideNgxFlagr({
+      featureFlagService: CustomFeatureFlagService,
+      routing: { redirectToIfDisabled: 'unauthorized' }
+    })
+  ],
+});
+
+const routes: Route[] = [
+  {
+    path: 'fast-delivery',
+    component: FastDeliveryComponent,
+    canMatch: canMatchFeatureFlag,
+    data: { featureFlag: 'fast-delivery' }
+  },
+];
 ```
 
 ---

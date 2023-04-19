@@ -3,13 +3,7 @@ import { inject } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { NgxFlagrConfiguration } from './config';
-
-/**
- * A FeatureFlag can be a string or an array of strings representing one or more feature flags.
- *
- * @publicApi
- */
-export type FeatureFlag = string | string[];
+import { FeatureFlag } from './feature-flag';
 
 /**
  * Service responsible for retrieving feature flag information.
