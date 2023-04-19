@@ -12,10 +12,9 @@ With `ngx-flagr`, you can easily manage feature flags, target specific users or 
   - [Register the service](#register-the-service)
 - [Usage](#usage)
   - [`featureFlag` directive](#featureflag-directive)
-    - [Examples](#examples)
-      - [With a single flag](#with-a-single-flag)
-      - [With multiple flags](#with-multiple-flags)
-      - [With a fallback](#with-a-fallback)
+    - [With a single flag](#with-a-single-flag)
+    - [With multiple flags](#with-multiple-flags)
+    - [With a fallback](#with-a-fallback)
 - [License](#license)
 
 ## Installation
@@ -72,9 +71,7 @@ bootstrapApplication(AppComponent, {
 
 The `featureFlag` directive takes a `FeatureFlag` for input that is either a `string` or a `string[]`. It then conditionally renders the content of your template based on the evaluation of the parameter by the provided `FeatureFlagService`.
 
-#### Examples
-
-##### With a single flag
+#### With a single flag
 
 ```html
 <div *featureFlag="'my-feature'">
@@ -82,7 +79,7 @@ The `featureFlag` directive takes a `FeatureFlag` for input that is either a `st
 </div>
 ```
 
-##### With multiple flags
+#### With multiple flags
 
 ```html
 <div *featureFlag="['my', 'feature']">
@@ -90,7 +87,7 @@ The `featureFlag` directive takes a `FeatureFlag` for input that is either a `st
 </div>
 ```
 
-##### With a fallback
+#### With a fallback
 
 ```html
 <div *featureFlag="'my-feature'; else disabledContent">
