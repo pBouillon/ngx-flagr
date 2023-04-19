@@ -1,12 +1,12 @@
 import { EnvironmentProviders, makeEnvironmentProviders } from '@angular/core';
 
+import { createConfiguration, NgxFlagrOptions } from './config';
 import { FeatureFlagDirective } from './feature-flag.directive';
 import { createFeatureFlagService } from './feature-flag.service';
-import { createConfiguration, NgxFlagrOptions } from './config';
 import {
-  INITIAL_CONFIGURATION,
   CONFIGURATION,
   FEATURE_FLAG_SERVICE,
+  INITIAL_CONFIGURATION,
 } from './tokens';
 
 /**
