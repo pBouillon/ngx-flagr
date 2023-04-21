@@ -34,6 +34,8 @@ All notable changes to this project will be documented in this file.
 
 ### Feature
 
+- **core:** Added `NgxFlagrModule` module for configuring and providing `ngx-flagr`
+- **core:** Added `forRoot` static method to `NgxFlagrModule` for providing configuration options
 - **core:** create a functional guard `canMatchFeatureFlag`
 - **core:** add the configuration of the `canMatchFeatureFlag` behavior to the `NgxFlagrConfiguration`
 - **core:** update the usage of `provideNgxConfiguration` to include a default `routing` section
