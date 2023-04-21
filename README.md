@@ -19,7 +19,7 @@ With `ngx-flagr`, you can easily manage feature flags, target specific users or 
     - [Configuration](#configuration)
     - [With feature flags](#with-feature-flags)
     - [With a fallback route](#with-a-fallback-route)
-    - [With a passthrough](#with-a-passthrough)
+    - [As a passthrough when no flags are provided](#as-a-passthrough-when-no-flags-are-provided)
     - [With a global redirection target](#with-a-global-redirection-target)
 - [License](#license)
 
@@ -52,7 +52,8 @@ export class CustomFeatureFlagService implements FeatureFlagService {
 
 ### Register the service
 
-Then, in your Angular `main.ts` file, configure the library to use this service:
+Then, in your Angular `main.ts` file, configure the library to use this service
+by calling `provideNgxFlagr` and passing in the desired options:
 
 ```ts
 import { bootstrapApplication } from '@angular/platform-browser';
@@ -65,6 +66,23 @@ import { FeatureFlagService } from './app/custom-feature-flag.service';
 bootstrapApplication(AppComponent, {
   providers: [
     provideNgxFlagr({ featureFlagService: CustomFeatureFlagService })
+  ],
+});
+```
+
+Alternatively, you can also use the `NgxFlagrModule.forRoot` static method:
+
+```ts
+import { bootstrapApplication } from '@angular/platform-browser';
+
+import { NgxFlagrModule } from '@ngx-flagr/core';
+
+import { AppComponent } from './app/app.component';
+import { FeatureFlagService } from './app/custom-feature-flag.service';
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    NgxFlagrModule.forRoot({ featureFlagService: CustomFeatureFlagService })
   ],
 });
 ```
