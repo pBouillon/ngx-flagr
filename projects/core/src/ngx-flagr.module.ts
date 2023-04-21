@@ -1,4 +1,5 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule, Type } from '@angular/core';
+import { FeatureFlagService } from 'dist/@ngx-flagr/core';
 
 import { NgxFlagrOptions } from './config';
 import { provideNgxFlagr } from './provide-ngx-flagr';
@@ -21,12 +22,12 @@ import { provideNgxFlagr } from './provide-ngx-flagr';
  * ```
  */
 @NgModule({})
-export class FeatureFlagModule {
+export class NgxFlagrModule {
   static forRoot(
     options: NgxFlagrOptions
-  ): ModuleWithProviders<FeatureFlagModule> {
+  ): ModuleWithProviders<NgxFlagrModule> {
     return {
-      ngModule: FeatureFlagModule,
+      ngModule: NgxFlagrModule,
       providers: [provideNgxFlagr(options)],
     };
   }
