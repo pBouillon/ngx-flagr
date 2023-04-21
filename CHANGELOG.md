@@ -24,6 +24,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Others
+
+- **meta:** Create a [devcontainer](https://containers.dev/) to be used in [GitHub Codespaces](https://docs.github.com/codespaces)
+
 ## [0.2.0] - (2023-04-19)
 
 ### Feature
