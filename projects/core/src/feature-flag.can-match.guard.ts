@@ -66,7 +66,9 @@ export const canMatchFeatureFlag: CanMatchFn = (
 
   if (isEnabled instanceof Promise) {
     return isEnabled.then(result => result || redirectTo);
-  } else if (isEnabled instanceof Observable) {
+  }
+
+  if (isEnabled instanceof Observable) {
     return isEnabled.pipe(map(result => result || redirectTo));
   }
 
