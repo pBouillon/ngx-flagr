@@ -32,7 +32,7 @@ describe(FeatureFlagPreloadingStrategy.name, () => {
     });
   });
 
-  describe('with Promise<bool>', () => {
+  describe('with Promise<boolean>', () => {
     it('preloads the route if the feature flag is enabled', () => {
       const route: Route = { data: { featureFlag: 'valid' } };
       const load = jasmine.createSpy('load').and.returnValue(of(true));
@@ -64,7 +64,7 @@ describe(FeatureFlagPreloadingStrategy.name, () => {
     });
   });
 
-  describe('with Observable<bool>', () => {
+  describe('with Observable<boolean>', () => {
     it('preloads the route if the feature flag is enabled', () => {
       const route: Route = { data: { featureFlag: 'valid' } };
       const load = jasmine.createSpy('load').and.returnValue(of(true));
