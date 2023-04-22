@@ -33,7 +33,7 @@ describe(FeatureFlagPreloadingStrategy.name, () => {
   });
 
   describe('with Promise<boolean>', () => {
-    it('preloads the route if the feature flag is enabled', () => {
+    it('preloads the route if the feature flag is enabled', done => {
       const route: Route = { data: { featureFlag: 'valid' } };
       const load = jasmine.createSpy('load').and.returnValue(of(true));
 
@@ -43,12 +43,15 @@ describe(FeatureFlagPreloadingStrategy.name, () => {
         TestBed.inject(FeatureFlagPreloadingStrategy)
           .preload(route, load)
           .subscribe({
-            complete: () => expect(load).toHaveBeenCalled(),
+            complete: () => {
+              expect(load).toHaveBeenCalled();
+              done();
+            },
           });
       });
     });
 
-    it('does not preload the route if the feature flag is disabled', () => {
+    it('does not preload the route if the feature flag is disabled', done => {
       const route: Route = { data: { featureFlag: 'invalid' } };
       const load = jasmine.createSpy('load').and.returnValue(of(true));
 
@@ -58,14 +61,17 @@ describe(FeatureFlagPreloadingStrategy.name, () => {
         TestBed.inject(FeatureFlagPreloadingStrategy)
           .preload(route, load)
           .subscribe({
-            complete: () => expect(load).not.toHaveBeenCalled(),
+            complete: () => {
+              expect(load).not.toHaveBeenCalled();
+              done();
+            },
           });
       });
     });
   });
 
   describe('with Observable<boolean>', () => {
-    it('preloads the route if the feature flag is enabled', () => {
+    it('preloads the route if the feature flag is enabled', done => {
       const route: Route = { data: { featureFlag: 'valid' } };
       const load = jasmine.createSpy('load').and.returnValue(of(true));
 
@@ -75,12 +81,15 @@ describe(FeatureFlagPreloadingStrategy.name, () => {
         TestBed.inject(FeatureFlagPreloadingStrategy)
           .preload(route, load)
           .subscribe({
-            complete: () => expect(load).toHaveBeenCalled(),
+            complete: () => {
+              expect(load).toHaveBeenCalled();
+              done();
+            },
           });
       });
     });
 
-    it('does not preload the route if the feature flag is disabled', () => {
+    it('does not preload the route if the feature flag is disabled', done => {
       const route: Route = { data: { featureFlag: 'invalid' } };
       const load = jasmine.createSpy('load').and.returnValue(of(true));
 
@@ -90,7 +99,10 @@ describe(FeatureFlagPreloadingStrategy.name, () => {
         TestBed.inject(FeatureFlagPreloadingStrategy)
           .preload(route, load)
           .subscribe({
-            complete: () => expect(load).not.toHaveBeenCalled(),
+            complete: () => {
+              expect(load).not.toHaveBeenCalled();
+              done();
+            },
           });
       });
     });
