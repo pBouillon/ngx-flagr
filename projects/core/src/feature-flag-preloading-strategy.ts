@@ -37,7 +37,11 @@ export class FeatureFlagPreloadingStrategy implements PreloadingStrategy {
 
     if (!featureFlag) {
       const { validIfNone } = this._configuration.routing;
-      if (isDevMode() && !validIfNone) {
+      if (validIfNone) {
+        return load();
+      }
+
+      if (isDevMode()) {
         console.warn(
           `Route ${route.path} does not have a feature flag specified`
         );
@@ -54,8 +58,8 @@ export class FeatureFlagPreloadingStrategy implements PreloadingStrategy {
 
     const isEnabled = this._featureFlagService.isEnabled(featureFlag);
 
-    if (typeof isEnabled === 'boolean' && isEnabled) {
-      return load();
+    if (typeof isEnabled === 'boolean') {
+      return isEnabled ? load() : of(null);
     }
 
     if (isEnabled instanceof Promise) {
