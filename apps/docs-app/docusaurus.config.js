@@ -59,7 +59,7 @@ const config = {
         title,
         logo: {
           alt: `${projectName} Logo`,
-          src: '../img/logo.svg',
+          src: 'img/logo.svg',
         },
         items: [
           {
@@ -67,6 +67,11 @@ const config = {
             sidebarId: 'docsSidebar',
             position: 'left',
             label: 'Tutorial',
+          },
+          {
+            href: `https://www.npmjs.com/org/${projectName}`,
+            label: 'npm',
+            position: 'right',
           },
           {
             href: `https://github.com/${organizationName}/${projectName}`,
@@ -82,8 +87,8 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Tutorial',
-                to: '/docs/intro',
+                label: 'Documentation',
+                to: '/docs/introduction',
               },
             ],
           },

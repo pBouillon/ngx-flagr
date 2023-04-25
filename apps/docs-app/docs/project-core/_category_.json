@@ -1,0 +1,8 @@
+{
+  "label": "@ngx-flagr/core",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "Utilities at the heart of ngx-flagr's logic"
+  }
+}
