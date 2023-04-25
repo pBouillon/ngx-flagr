@@ -142,7 +142,7 @@ describe(FeatureFlagDirective.name, () => {
       });
     });
 
-    describe('with Promise<bool>', () => {
+    describe('with Promise<boolean>', () => {
       it('render the feature template if the feature flag is enabled', async () => {
         featureFlagServiceMock.isEnabled.and.returnValue(Promise.resolve(true));
 
@@ -222,7 +222,7 @@ describe(FeatureFlagDirective.name, () => {
       });
     });
 
-    describe('with Promise<bool>', () => {
+    describe('with Promise<boolean>', () => {
       it('not render the feature template', async () => {
         featureFlagServiceMock.isEnabled.and.returnValue(
           Promise.resolve(false)
