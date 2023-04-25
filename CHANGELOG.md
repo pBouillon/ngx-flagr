@@ -26,6 +26,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Feature
+
+- **core:** add `FeatureFlagPreloadingStrategy` preloading strategy based on the implementation of the `FeatureFlagService`
+
 ### Others
 
 - **meta:** Create a [devcontainer](https://containers.dev/) to be used in [GitHub Codespaces](https://docs.github.com/codespaces)
@@ -34,8 +38,8 @@ All notable changes to this project will be documented in this file.
 
 ### Feature
 
-- **core:** Added `NgxFlagrModule` module for configuring and providing `ngx-flagr`
-- **core:** Added `forRoot` static method to `NgxFlagrModule` for providing configuration options
+- **core:** add `NgxFlagrModule` module for configuring and providing `ngx-flagr`
+- **core:** add `forRoot` static method to `NgxFlagrModule` for providing configuration options
 - **core:** create a functional guard `canMatchFeatureFlag`
 - **core:** add the configuration of the `canMatchFeatureFlag` behavior to the `NgxFlagrConfiguration`
 - **core:** update the usage of `provideNgxConfiguration` to include a default `routing` section
