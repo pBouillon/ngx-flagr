@@ -59,7 +59,7 @@ const config = {
         title,
         logo: {
           alt: `${projectName} Logo`,
-          src: 'img/logo.svg',
+          src: 'img/logos/ngx-flagr.png',
         },
         items: [
           {
@@ -123,7 +123,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} ${projectName}. Licensed under MIT.`,
+        copyright: `Copyright © ${new Date().getFullYear()} ${projectName} - Licensed under MIT`,
       },
       prism: {
         theme: lightCodeTheme,

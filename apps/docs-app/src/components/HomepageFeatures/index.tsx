@@ -12,7 +12,7 @@ type FeatureItem = {
 const FeatureList: FeatureItem[] = [
   {
     title: 'Seamless Integration',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    Svg: require('@site/static/img/undraw_dev_focus.svg').default,
     description: (
       <>
         <code>ngx-flagr</code> is built as a drop-in solution for feature flag management.
@@ -21,7 +21,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Highly Configurable',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    Svg: require('@site/static/img/undraw_options.svg').default,
     description: (
       <>
         With a lot of options, you can opt-in for the features you want or
@@ -31,7 +31,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Open Source',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    Svg: require('@site/static/img/undraw_programming.svg').default,
     description: (
       <>
         Hosted on GitHub and licensed under the MIT license, you are free to use
