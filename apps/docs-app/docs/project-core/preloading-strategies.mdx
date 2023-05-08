@@ -30,6 +30,7 @@ relies on the configuration provided to `ngx-flagr` on initialization under the
 
 ```ts
 const options: NgxFlagrOptions = {
+  // ...
   routing: {
     keys: {
       // Where to find the feature flag in the `Route`'s `data`
@@ -74,9 +75,10 @@ export const routes: Route[] = [
     ),
     // highlight-next-line
     data: { featureFlag: 'my-feature' },
-  }
+  },
 ];
 ```
+
 Then, provide the `FeatureFlagPreloadingStrategy` to the router's configuration:
 
 <Tabs defaultValue="main.ts" values={[
