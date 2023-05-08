@@ -23,6 +23,7 @@ Here are the main parts of `@ngx-flagr/core` that can help you manage your
 feature flags:
 
 - [Directives](./directives.md) to help you modulate your templates
+- [Guards](./guards.md) to prevent access to specific routes
 - [Preloading Strategies](./preloading-strategies.md) to speed up the loading
   of the lazily-loaded parts of your application
 - [Services](./services.md) to indicate whether a feature flag is enabled or not
