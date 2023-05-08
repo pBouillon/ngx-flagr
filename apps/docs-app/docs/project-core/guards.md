@@ -37,21 +37,6 @@ const options: NgxFlagrOptions = {
 };
 ```
 
-:::note Default values and behavior
-
-```ts
-routing: {
-      keys: {
-        featureFlag: 'featureFlag',
-        redirectToIfDisabled: 'redirectToIfDisabled',
-      },
-      redirectToIfDisabled: null,
-      validIfNone: false,
-    },
-```
-
-:::
-
 :::caution
 
 Both `routing.keys.featureFlag` and `routing.validIfNone` are also used by the
