@@ -63,10 +63,10 @@ dedicated to their evaluation.
 In order for the library to work, we will need to provide an implementation for
 it:
 
-```ts
+```ts title="custom-feature-flag.service.ts"
 import { Injectable } from '@angular/core';
 
-import { FeatureFlagService } from '@ngx-flagr/core'
+import { FeatureFlagService } from '@ngx-flagr/core';
 
 @Injectable({ providedIn: 'root' })
 export class CustomFeatureFlagService implements FeatureFlagService {
@@ -88,7 +88,82 @@ type FeatureFlag = string | string[];
 
 ### Wiring everything up
 
-// TODO
+Once that we have an implementation of the `FeatureFlagService` to provide to
+the library, all is left is to wire it up.
+
+You can do so either by using the provider, favored for the standalone API, or
+the former way, in your `app.module.ts`:
+
+<Tabs defaultValue="main.ts" values={[
+  { label: 'Using providers', value: 'main.ts', },
+  { label: 'Using a module', value: 'app.module.ts', },
+]}>
+
+<TabItem value="main.ts">
+
+In the `main.ts` file, you can call `provideNgxFlagr` in the `providers` array
+and pass in which service should be used for the feature flags evaluation:
+
+```typescript title="main.ts"
+import { bootstrapApplication } from '@angular/platform-browser';
+
+// highlight-next-line
+import { provideNgxFlagr } from '@ngx-flagr/core';
+
+import { AppComponent } from './app/app.component';
+import { CustomFeatureFlagService } from './app/custom-feature-flag.service';
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    // highlight-next-line
+    provideNgxFlagr({ featureFlagService: CustomFeatureFlagService }),
+  ],
+}).catch(err => console.error(err));
+```
+
+</TabItem>
+
+<TabItem value="app.module.ts">
+
+```typescript title="app.module.ts"
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+// highlight-next-line
+import { NgxFlagrModule } from '@ngx-flagr/core';
+
+import { AppComponent } from './app.component';
+import { CustomFeatureFlagService } from './custom-feature-flag.service';
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    // highlight-next-line
+    NgxFlagrModule.forRoot({ featureFlagService: CustomFeatureFlagService }),
+  ],
+  bootstrap: [AppComponent],
+})
+export class AppModule {}
+```
+
+</TabItem>
+</Tabs>
+
+:::info
+
+The `NgxFlagrOptions` also accepts a lambda to indicate which
+`FeatureFlagService` should be resolved:
+
+```typescript title="main.ts"
+const options: NgxFlagrOptions = {
+  featureFlagService: () => environment.useCustomService
+    ? CustomFeatureFlagService
+    : RegularFeatureFlagService,
+};
+```
+
+:::
 
 ## Extending the library
 
@@ -100,4 +175,3 @@ functionality.
 To do this, you can install and use one of the available integration packages or
 add-on packages provided by the ngx-flagr library. Check out the documentation
 of the relevant packages for more information on how to use them.
-
