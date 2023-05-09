@@ -69,7 +69,7 @@ os.system('npm login')
 # Publish the library to the organization's scope
 log("Publishing the library to the organization's scope ...")
 try:
-    #os.system('npm publish')
+    os.system('npm publish')
     log(f"Library published on https://www.npmjs.com/package/{library_scope}")
 except subprocess.CalledProcessError as e:
     error(f"Failed to publish the library: {e.stderr.strip()}")
