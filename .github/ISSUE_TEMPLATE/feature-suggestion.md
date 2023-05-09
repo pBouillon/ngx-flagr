@@ -1,7 +1,7 @@
 ---
 name: Feature suggestion
 about: Suggest an idea for this project
-title: ''
+title: 'Feature suggestion: (fill in)'
 labels: ''
 assignees: ''
 
