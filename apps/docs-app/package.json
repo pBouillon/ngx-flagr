@@ -6,7 +6,7 @@
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
     "build": "docusaurus build",
-    "build:ci": "docusaurus build --out-dir ngx-flagr/build",
+    "build:ci": "docusaurus build --out-dir ngx-flagr/build-prod",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
