@@ -63,20 +63,36 @@ const config = {
         },
         items: [
           {
-            type: 'docSidebar',
-            sidebarId: 'docsSidebar',
+            to: 'docs/quickstart',
+            label: 'Quickstart',
             position: 'left',
-            label: 'Tutorial',
+          },
+          {
+            to: 'docs/introduction',
+            label: 'Documentation',
+            position: 'left',
+          },
+          {
+            label: 'Projects',
+            position: 'left',
+            items: [
+              {
+                label: '@ngx-flagr/core',
+                to: 'docs/category/ngx-flagrcore',
+              },
+            ],
           },
           {
             href: `https://www.npmjs.com/org/${projectName}`,
             label: 'npm',
             position: 'right',
+            target: '_blank',
           },
           {
             href: `https://github.com/${organizationName}/${projectName}`,
             label: 'GitHub',
             position: 'right',
+            target: '_blank',
           },
         ],
       },
@@ -86,6 +102,10 @@ const config = {
           {
             title: 'Docs',
             items: [
+              {
+                label: 'Quickstart',
+                to: '/docs/quickstart',
+              },
               {
                 label: 'Documentation',
                 to: '/docs/introduction',

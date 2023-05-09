@@ -1,0 +1,249 @@
+---
+sidebar_position: 0
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Quickstart
+
+`ngx-flagr` is a library built to support feature flags management. It provides
+a set of Angular classes that you can use to easily and efficiently manage
+feature flags.
+
+## Installation
+
+<Tabs defaultValue="npm" values={[
+  {label: 'npm', value: 'npm', },
+  {label: 'Yarn', value: 'yarn', },
+  {label: 'pnpm', value: 'pnpm', },
+]}>
+
+  <TabItem value="npm">
+
+```bash
+npm install @ngx-flagr/core
+```
+
+  </TabItem>
+
+  <TabItem value="yarn">
+
+```bash
+yarn add @ngx-flagr/core
+```
+
+  </TabItem>
+
+  <TabItem value="pnpm">
+
+```bash
+pnpm add @ngx-flagr/core
+```
+
+  </TabItem>
+</Tabs>
+
+## Creating the `FeatureFlagService`
+
+For the feature flags evaluation, `ngx-flagr` based itself on a service
+dedicated to their evaluation.
+
+In order for the library to work, we will need to provide an implementation for
+it:
+
+```ts title="simplest-feature-flag.service.ts"
+import { Injectable } from '@angular/core';
+
+// highlight-next-line
+import { FeatureFlagService, FeatureFlag } from '@ngx-flagr/core';
+
+// highlight-start
+@Injectable({ providedIn: 'root' })
+export class SimplestFeatureFlagService implements FeatureFlagService {
+  isEnabled(featureFlag: FeatureFlag): boolean {
+    return true;
+  }
+}
+// highlight-end
+```
+
+## Initializing `ngx-flagr`
+
+Using either the `provideNgxFlagr` or the `NgxFlagrModule.forRoot` methods,
+indicate which `FeatureFlagService` should be used by `ngx-flagr`:
+
+<Tabs defaultValue="main.ts" values={[
+  { label: 'Using providers', value: 'main.ts', },
+  { label: 'Using a module', value: 'app.module.ts', },
+]}>
+
+<TabItem value="main.ts">
+
+```typescript title="main.ts"
+import { bootstrapApplication } from '@angular/platform-browser';
+
+// highlight-next-line
+import { provideNgxFlagr } from '@ngx-flagr/core';
+
+import { AppComponent } from './app/app.component';
+// highlight-next-line
+import { SimplestFeatureFlagService } from './app/simplest-feature-flag.service';
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    // highlight-next-line
+    provideNgxFlagr({ featureFlagService: SimplestFeatureFlagService }),
+  ],
+}).catch(err => console.error(err));
+```
+
+</TabItem>
+
+<TabItem value="app.module.ts">
+
+```typescript title="app.module.ts"
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+// highlight-next-line
+import { NgxFlagrModule } from '@ngx-flagr/core';
+
+import { AppComponent } from './app.component';
+// highlight-next-line
+import { SimplestFeatureFlagService } from './simplest-feature-flag.service';
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    // highlight-next-line
+    NgxFlagrModule.forRoot({ featureFlagService: SimplestFeatureFlagService }),
+  ],
+  bootstrap: [AppComponent],
+})
+export class AppModule {}
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+Once everything is wired-up, `ngx-flagr` is ready to be used.
+
+### Directives
+
+The `FeatureFlagDirective` allows you to control which template is rendered
+based on the evaluation of the provided feature flag.
+
+Additionally, you can specify what should be rendered if it is not enabled:
+
+```ts
+@Component({
+  selector: '...',
+  standalone: true,
+  imports: [FeatureFlagDirective],
+  template: `
+    <div *featureFlag="'my-feature'; else disabledContent">
+      'my-feature' feature flag is enabled.
+    </div>
+
+    <ng-template #disabledContent>
+      'my-feature' feature flag is disabled.
+    </ng-template>
+  `
+})
+export class MyComponent {}
+```
+
+### Guards
+
+Using the `canMatchFeatureFlag` `CanMatchFn`, you can restrict routes and
+redirect the user based on the feature flags evaluation.
+
+Alternatively, you can redirect the user if it is not enabled:
+
+```ts
+export const routes: Route[] = [
+  {
+    path: 'some-feature',
+    component: SomeFeatureComponent,
+    // highlight-start
+    data: { featureFlag: 'segment-1' },
+    canMatch: [ canMatchFeatureFlag ],
+    // highlight-end
+  },
+  {
+    path: 'new-feature',
+    component: NewFeatureComponent,
+    // highlight-start
+    data: {
+      featureFlag: 'segment-2',
+      redirectToIfDisabled: 'default-feature',  // 👈 With redirection
+    },
+    canMatch: [ canMatchFeatureFlag ],
+    // highlight-end
+  },
+];
+```
+
+### Preloading Strategies
+
+Using the `FeatureFlagPreloadingStrategy` you can speed up the loading of
+lazyly loaded routes based on the feature flags that decorates them.
+
+You first need to specify the `Route`'s feature flags:
+
+```ts
+export const routes: Route[] = [
+  {
+    path: 'premium-shipping',
+    loadComponent: () => import('./app/feature/premium-shipping.component').then(
+      (m) => m.CustomComponent
+    ),
+    // highlight-next-line
+    data: { featureFlag: 'my-feature' },
+  },
+];
+```
+
+And then use the `PreloadingStrategy` in your `Router`'s configuration:
+
+<Tabs defaultValue="main.ts" values={[
+  { label: 'Using providers', value: 'main.ts', },
+  { label: 'Using a module', value: 'app.module.ts', },
+]}>
+
+<TabItem value="main.ts">
+
+```typescript title="main.ts"
+bootstrapApplication(AppComponent, {
+  providers: [
+    // highlight-next-line
+    provideRouter(routes, withPreloading(FeatureFlagPreloadingStrategy)),
+  ],
+});
+```
+
+</TabItem>
+
+<TabItem value="app.module.ts">
+
+```typescript title="app.module.ts"
+@NgModule({
+  imports: [
+    // highlight-next-line
+    RouterModule.forRoot(routes, { preloadingStrategy: FeatureFlagPreloadingStrategy }),
+  ],
+})
+export class AppModule { }
+```
+
+</TabItem>
+</Tabs>
+
+## Additional Resources
+
+To learn more about `ngx-flagr`, its features and how to configure it, you
+can check the [detailed documentation](./category/ngx-flagrcore).
