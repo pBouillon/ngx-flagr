@@ -1,9 +1,11 @@
-import { Injectable } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
+import { Component, Injectable } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
+import { FeatureFlag } from './feature-flag';
 import { FeatureFlagDirective } from './feature-flag.directive';
-import { NgxFlagrModule } from './ngx-flagr.module';
 import { FeatureFlagService } from './feature-flag.service';
+import { NgxFlagrModule } from './ngx-flagr.module';
 import { FEATURE_FLAG_SERVICE } from './tokens';
 
 @Injectable()
@@ -13,24 +15,33 @@ class TestFeatureFlagService implements FeatureFlagService {
   }
 }
 
-describe(NgxFlagrModule.name, () => {
+@Component({
+  template: `<div *featureFlag="'flag'">Feature enabled</div>`,
+})
+class HostComponent {}
+
+describe('NgxFlagrModule', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
+      declarations: [HostComponent],
       imports: [NgxFlagrModule],
       providers: [TestFeatureFlagService],
     });
   });
 
-  it('does not provide the FeatureFlag directive', () => {
-    expect(() => TestBed.inject(FeatureFlagDirective)).toThrowError(
-      /No provider for FeatureFlagDirective/
+  it('should not create the component', () => {
+    expect(() => TestBed.createComponent(HostComponent)).toThrowError(
+      /FeatureFlagService implementation not provided/
     );
   });
 });
 
 describe('NgxFlagrModule.forRoot()', () => {
+  let fixture: ComponentFixture<HostComponent>;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
+      declarations: [HostComponent],
       imports: [
         NgxFlagrModule.forRoot({
           featureFlagService: TestFeatureFlagService,
@@ -38,12 +49,13 @@ describe('NgxFlagrModule.forRoot()', () => {
       ],
       providers: [TestFeatureFlagService],
     });
+
+    fixture = TestBed.createComponent(HostComponent);
+    fixture.detectChanges();
   });
 
-  it('provides the FeatureFlag directive', () => {
-    expect(() => TestBed.inject(FeatureFlagDirective)).not.toThrowError(
-      /No provider for FeatureFlagDirective/
-    );
+  it('should create the component', () => {
+    expect(fixture.componentInstance).toBeTruthy();
   });
 
   it('provides the desired service', () => {

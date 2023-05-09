@@ -25,12 +25,6 @@ describe(provideNgxFlagr.name, () => {
     });
   });
 
-  it('provides the FeatureFlag directive', () => {
-    expect(() => TestBed.inject(FeatureFlagDirective)).not.toThrowError(
-      /No provider for FeatureFlagDirective/
-    );
-  });
-
   it('provides the desired service', () => {
     expect(TestBed.inject(FEATURE_FLAG_SERVICE)).toBeInstanceOf(
       TestFeatureFlagService
