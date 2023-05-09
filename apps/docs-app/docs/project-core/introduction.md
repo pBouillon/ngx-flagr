@@ -13,7 +13,7 @@ you in managing your feature flags.
 :::note
 
 Before diving into the details of the package, ensure that you have
-[installed `ngx-flagr` correctly](../getting-started.mdx#installation).
+[installed `ngx-flagr` correctly](../getting-started#installation).
 
 :::
 
