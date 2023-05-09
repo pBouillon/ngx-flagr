@@ -26,12 +26,18 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Bug Fixes
+
+- **core:** remove the `FeatureFlagDirective` from the `Provider`s array of `provideNgxFlagr`
+- **core:** add the `NgxFlagrModule` to the public API
+
 ### Feature
 
 - **core:** add `FeatureFlagPreloadingStrategy` preloading strategy based on the implementation of the `FeatureFlagService`
 
 ### Others
 
+- **apps/docs-app:** add a [Docusaurus](https://docusaurus.io/) documentation project
 - **meta:** Create a [devcontainer](https://containers.dev/) to be used in [GitHub Codespaces](https://docs.github.com/codespaces)
 
 ## [0.2.0] - (2023-04-19)

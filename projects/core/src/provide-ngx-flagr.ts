@@ -1,7 +1,6 @@
 import { EnvironmentProviders, makeEnvironmentProviders } from '@angular/core';
 
 import { createConfiguration, NgxFlagrOptions } from './config';
-import { FeatureFlagDirective } from './feature-flag.directive';
 import { createFeatureFlagService } from './feature-flag.service';
 import {
   CONFIGURATION,
@@ -16,9 +15,6 @@ import {
  * @returns The dependencies for ngx-flagr.
  *
  * @usageNotes
- * Use this function to provide the dependencies for ngx-flagr in your application. You can configure the feature flag service implementation, and the initial configuration for the library.
- *
- * ### Providing a custom `FeatureFlagService`
  *
  * ```ts
  * bootstrapApplication(AppComponent, {
@@ -32,7 +28,6 @@ export function provideNgxFlagr(
   options: NgxFlagrOptions
 ): EnvironmentProviders {
   return makeEnvironmentProviders([
-    FeatureFlagDirective,
     {
       provide: INITIAL_CONFIGURATION,
       useValue: options,

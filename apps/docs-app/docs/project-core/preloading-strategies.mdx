@@ -1,0 +1,125 @@
+---
+sidebar_position: 4
+description: A preloading strategy that uses feature flags to determine whether or not to preload a module.
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Preloading Strategies
+
+## `FeatureFlagPreloadingStrategy`
+
+A preloading strategy that uses feature flags to determine whether or not to preload a module.
+
+:::note
+
+For more details about Angular preloading strategies, you can check those
+resources:
+
+- [Preloading Modules](https://angular.io/guide/lazy-loading-ngmodules#preloading-modules) on Angular.io
+- [Optimize your Angular app's user experience with preloading strategies](https://dev.to/this-is-angular/optimize-your-angular-apps-user-experience-with-preloading-strategies-3ie7) on DEV.to
+- [Preloading Strategies to Speed Up Angular App Loading Time](https://blog.bitsrc.io/preloading-strategies-boost-up-angular-app-loading-time-ffb19da63155) on Medium
+
+:::
+
+### Configuration
+
+This [PreloadingStrategy](https://angular.io/api/router/PreloadingStrategy)
+relies on the configuration provided to `ngx-flagr` on initialization under the
+`routing` key:
+
+```ts
+const options: NgxFlagrOptions = {
+  // ...
+  routing: {
+    keys: {
+      // Where to find the feature flag in the `Route`'s `data`
+      featureFlag: 'featureFlag',
+    },
+    // Whether the `Route` should be preloaded or not if no feature flag is found
+    validIfNone: false,
+  }
+};
+```
+
+:::info Default values and behavior
+
+If the `routing` section is not provided, the `FeatureFlagPreloadingStrategy`
+will attempt to retrieve the feature flags from the `featureFlag` property of
+the `Route`'s `data`.
+
+If none is found, it will note preload the associated `Route` if not specified
+otherwise.
+
+:::
+
+:::caution
+
+Both `routing.keys.featureFlag` and `routing.validIfNone` are also used by
+[`canMatchFeatureFlag`](./guards#canmatchfeatureflag) where they serve the same
+purpose (resolving feature flags and the behavior to adopt if none is found).
+
+:::
+
+### Usage
+
+To use the `FeatureFlagPreloadingStrategy`, first specify the feature flag of
+your `Route` in the appropriate `data` property:
+
+```ts
+export const routes: Route[] = [
+  {
+    path: '...',
+    loadComponent: () => import('./app/.../custom.component').then(
+      (m) => m.CustomComponent
+    ),
+    // highlight-next-line
+    data: { featureFlag: 'my-feature' },
+  },
+];
+```
+
+Then, provide the `FeatureFlagPreloadingStrategy` to the router's configuration:
+
+<Tabs defaultValue="main.ts" values={[
+  { label: 'Using providers', value: 'main.ts', },
+  { label: 'Using a module', value: 'app.module.ts', },
+]}>
+
+<TabItem value="main.ts">
+
+```typescript title="main.ts"
+bootstrapApplication(AppComponent, {
+  providers: [
+    // highlight-next-line
+    provideRouter(routes, withPreloading(FeatureFlagPreloadingStrategy)),
+  ],
+});
+```
+
+</TabItem>
+
+<TabItem value="app.module.ts">
+
+```typescript title="app.module.ts"
+@NgModule({
+  imports: [
+    // highlight-next-line
+    RouterModule.forRoot(routes, { preloadingStrategy: FeatureFlagPreloadingStrategy }),
+  ],
+})
+export class AppModule { }
+```
+
+</TabItem>
+</Tabs>
+
+:::info
+
+In case a feature flag is not detected for a specific `Route`, and `ngx-flagr`
+has been set up to exclude routes without any feature flags, a warning message
+will be displayed in the console (applicable only in development mode) to notify
+you which `Route` could potentially exhibit this unexpected behavior.
+
+:::
