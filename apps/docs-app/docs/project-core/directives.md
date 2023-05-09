@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+description: The FeatureFlagDirective is an Angular structural directive that can be used
 ---
 
 # Directives

@@ -1,5 +1,6 @@
 ---
 sidebar_position: 5
+description: The  FeatureFlagService is a service responsible for retrieving feature flag
 ---
 
 # Services

@@ -1,5 +1,6 @@
 ---
 sidebar_position: 3
+description: A functional guard that checks whether a route can be activated based on the
 ---
 
 # Guards
