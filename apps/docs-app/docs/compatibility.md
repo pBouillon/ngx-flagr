@@ -33,4 +33,4 @@ Here after is the compatibility list of `ngx-flagr` compared to Angular versions
 
 | `@ngx-flagr/core` | Angular |
 |:-----------------:|:-------:|
-|       `0.x.y`     | `15.2.x`|
+| `15.x.y`          | `15.2.x`|
