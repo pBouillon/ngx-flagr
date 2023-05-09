@@ -39,7 +39,7 @@ All notable changes to this project will be documented in this file.
 
 - **apps/docs-app:** add a [Docusaurus](https://docusaurus.io/) documentation project
 - **meta:** create a [devcontainer](https://containers.dev/) to be used in [GitHub Codespaces](https://docs.github.com/codespaces)
-  - - **meta:** create [a script](./scripts/publish-ngrx-flagr-core.py) to publish the `@ngx-flagr` library easily
+- **meta:** create [a script](./scripts/publish-ngrx-flagr-core.py) to publish the `@ngx-flagr` library easily
 
 ## [0.2.0] - (2023-04-19)
 
