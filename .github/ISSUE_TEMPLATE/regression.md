@@ -1,7 +1,7 @@
 ---
 name: Regression
 about: Describe this issue template's purpose here.
-title: 'Regression: (fill in)'
+title: "[Regression] <title>"
 labels: ''
 assignees: ''
 
