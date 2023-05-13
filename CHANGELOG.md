@@ -24,6 +24,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Others
+
+- **meta:** add a condition to run the CI only when something in `projects/` has changed
+
 ## [15.0.0-beta.1] - (2023-05-09)
 
 ### Bug Fixes
