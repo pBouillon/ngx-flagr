@@ -29,6 +29,7 @@ All notable changes to this project will be documented in this file.
 ### Others
 
 - **meta:** add a condition to run the CI only when something in `projects/` has changed
+- **apps/docs-app:** showcase the contributors in a dedicated page
 
 ## [15.0.0-beta.1] - (2023-05-09)
 
