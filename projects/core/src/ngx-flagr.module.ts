@@ -2,7 +2,7 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 
 import { NgxFlagrOptions } from './config';
 import { FeatureFlagDirective } from './feature-flag.directive';
-import { provideNgxFlagr } from './provide-ngx-flagr';
+import { provideNgxFlagr } from './provide-core';
 
 /**
  * The main module for configuring and providing the `ngx-flagr`
