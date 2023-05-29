@@ -8,12 +8,12 @@
     "build:core": "ng build core",
     "watch:core": "ng build core --watch --configuration development",
     "test:core": "ng test core --browsers=Firefox",
-    "test:core:ci": "ng test core --browsers=FirefoxHeadless --watch=false --code-coverage",
+    "test:ci:core": "ng test core --browsers=FirefoxHeadless --watch=false --code-coverage",
 
     "build:routing": "ng build routing",
     "watch:routing": "ng build routing --watch --configuration development",
     "test:routing": "ng test routing --browsers=Firefox",
-    "test:routing:ci": "ng test routing --browsers=FirefoxHeadless --watch=false --code-coverage"
+    "test:ci:routing": "ng test routing --browsers=FirefoxHeadless --watch=false --code-coverage"
   },
   "private": true,
   "dependencies": {
