@@ -36,10 +36,10 @@ jobs:
         run: npm run build:routing
 
       - name: Test @ngx-flagr/core
-        run: npm run test:ci:core
+        run: npm run test:core:ci
 
       - name: Test @ngx-flagr/core
-        run: npm run test:ci:routing
+        run: npm run test:routing:ci
 
       - name: Upload test results
         uses: actions/upload-artifact@v3
