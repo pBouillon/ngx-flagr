@@ -1,5 +1,8 @@
 import { EnvironmentProviders, makeEnvironmentProviders } from '@angular/core';
 
+import { NgxFlagrRoutingOptions, createConfiguration } from './config';
+import { CONFIGURATION, INITIAL_CONFIGURATION } from './tokens';
+
 /**
  * Provides the ngx-flagr routing utilities' dependencies
  *
@@ -18,6 +21,18 @@ import { EnvironmentProviders, makeEnvironmentProviders } from '@angular/core';
  *
  * @publicApi
  */
-export function provideNgxFlagrRouting(): EnvironmentProviders {
-  return makeEnvironmentProviders([]);
+export function provideNgxFlagrRouting(
+  options?: NgxFlagrRoutingOptions
+): EnvironmentProviders {
+  return makeEnvironmentProviders([
+    {
+      provide: INITIAL_CONFIGURATION,
+      useValue: options,
+    },
+    {
+      provide: CONFIGURATION,
+      deps: [INITIAL_CONFIGURATION],
+      useFactory: createConfiguration,
+    },
+  ]);
 }
