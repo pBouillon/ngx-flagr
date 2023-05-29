@@ -7,16 +7,14 @@ import { provideNgxFlagr } from './provide-core';
 /**
  * The main module for configuring and providing the `ngx-flagr`
  *
- * Use the static `forRoot` method to provide the configuration options for the
- * guard. This method also provides the directives and services associated with
- * this library.
+ * Use the static `forRoot` method to provide the directives and services
+ * associated with this library
  *
  * @example
  * ```
  * imports: [
- *   FeatureFlagModule.forRoot({
- *       featureFlagService: CustomFeatureFlagService,
- *     },
+ *   NgxFlagrModule.forRoot({
+ *     featureFlagService: CustomFeatureFlagService,
  *   }),
  * ]
  * ```
