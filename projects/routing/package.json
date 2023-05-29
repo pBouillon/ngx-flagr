@@ -1,0 +1,36 @@
+{
+  "name": "routing",
+  "version": "15.0.0-beta.1",
+  "description": "Routing utilities for ngx-flagr",
+  "keywords": [
+    "Angular",
+    "feature flags",
+    "A/B testing",
+    "ngx-flagr",
+    "Routing"
+  ],
+  "author": {
+    "name": "Pierre Bouillon",
+    "url": "https://github.com/pbouillon"
+  },
+  "contributors": [],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pbouillon/ngx-flagr.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pbouillon/ngx-flagr/issues"
+  },
+  "homepage": "https://github.com/pbouillon/ngx-flagr#readme",
+  "peerDependencies": {
+    "@angular/common": "^15.2.0",
+    "@angular/core": "^15.2.0",
+    "@angular/router": "^15.2.0",
+    "@ngx-flagr/core": "^15.0.0-beta.1"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}
