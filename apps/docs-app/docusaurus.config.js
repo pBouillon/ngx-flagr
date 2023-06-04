@@ -80,6 +80,10 @@ const config = {
                 label: '@ngx-flagr/core',
                 to: 'docs/category/ngx-flagrcore',
               },
+              {
+                label: '@ngx-flagr/routing',
+                to: 'docs/category/ngx-flagrrouting',
+              },
             ],
           },
           {

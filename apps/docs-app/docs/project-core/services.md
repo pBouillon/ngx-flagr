@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 1
 description: The  FeatureFlagService is a service responsible for retrieving feature flag
 ---
 
@@ -10,16 +10,6 @@ description: The  FeatureFlagService is a service responsible for retrieving fea
 The  `FeatureFlagService` is a service responsible for retrieving feature flag
 information. It provides a way for its consumer to check whether a feature flag
 is enabled or not.
-
-:::note
-
-This service is used by several other parts of `@ngx-flagr/core`, including:
-
-- The [`canMatchFeatureFlag`](./guards#canmatchfeatureflag)
-- The [`FeatureFlagDirective`](./directives#featureflagdirective)
-- The [`FeatureFlagPreloadingStrategy`](./preloading-strategies#featureflagpreloadingstrategy)
-
-:::
 
 ### Methods
 
