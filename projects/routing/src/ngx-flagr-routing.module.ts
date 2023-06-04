@@ -12,8 +12,7 @@ import { provideNgxFlagrRouting } from './provide-routing';
  * @example
  * ```
  * imports: [
- *   NgxFlagrRoutingModule.forRoot({
- *   }),
+ *   NgxFlagrRoutingModule.forRoot(),
  * ]
  * ```
  */
