@@ -53,10 +53,7 @@ export type NgxFlagrRoutingOptions =
 export function createConfiguration(
   optionsInput?: NgxFlagrRoutingOptions
 ): NgxFlagrRoutingConfiguration {
-  const DEFAULT_ROUTING_CONFIGURATION: Omit<
-    NgxFlagrRoutingConfiguration,
-    'featureFlagService'
-  > = {
+  const DEFAULT_ROUTING_CONFIGURATION: NgxFlagrRoutingConfiguration = {
     keys: {
       featureFlag: 'featureFlag',
       redirectToIfDisabled: 'redirectToIfDisabled',
