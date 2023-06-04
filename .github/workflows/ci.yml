@@ -29,11 +29,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build
-        run: npm run build
+      - name: Build @ngx-flagr/core
+        run: npm run build:core
 
-      - name: Run tests
-        run: npm run test:ci
+      - name: Build @ngx-flagr/routing
+        run: npm run build:routing
+
+      - name: Test @ngx-flagr/core
+        run: npm run test:core:ci
+
+      - name: Test @ngx-flagr/core
+        run: npm run test:routing:ci
 
       - name: Upload test results
         uses: actions/upload-artifact@v3

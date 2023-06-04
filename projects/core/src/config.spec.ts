@@ -17,14 +17,6 @@ describe('createConfiguration', () => {
 
     expect(createConfiguration(options)).toEqual({
       featureFlagService: TestService,
-      routing: {
-        keys: {
-          featureFlag: 'featureFlag',
-          redirectToIfDisabled: 'redirectToIfDisabled',
-        },
-        redirectToIfDisabled: null,
-        validIfNone: false,
-      },
     });
   });
 
@@ -37,40 +29,16 @@ describe('createConfiguration', () => {
 
     expect(createConfiguration(options)).toEqual({
       featureFlagService: factory,
-      routing: {
-        keys: {
-          featureFlag: 'featureFlag',
-          redirectToIfDisabled: 'redirectToIfDisabled',
-        },
-        redirectToIfDisabled: null,
-        validIfNone: false,
-      },
     });
   });
 
   it('creates options that contain passed in options', () => {
     options = {
       featureFlagService: TestService,
-      routing: {
-        keys: {
-          featureFlag: 'featureFlag-key',
-          redirectToIfDisabled: 'unauthorized-key',
-        },
-        redirectToIfDisabled: 'unauthorized',
-        validIfNone: true,
-      },
     };
 
     expect(createConfiguration(options)).toEqual({
       featureFlagService: TestService,
-      routing: {
-        keys: {
-          featureFlag: 'featureFlag-key',
-          redirectToIfDisabled: 'unauthorized-key',
-        },
-        redirectToIfDisabled: 'unauthorized',
-        validIfNone: true,
-      },
     });
   });
 });

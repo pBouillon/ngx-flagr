@@ -3,11 +3,15 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test --browsers=Firefox",
-    "test:ci": "ng test --browsers=FirefoxHeadless --watch=false --code-coverage",
-    "format": "prettier --write \"projects/**/*.{ts,html,scss}\""
+    "format": "prettier --write \"projects/**/*.{ts,html,scss}\"",
+
+    "build:core": "ng build core",
+    "test:core": "ng test core --browsers=Firefox",
+    "test:core:ci": "ng test core --browsers=FirefoxHeadless --watch=false --code-coverage",
+
+    "build:routing": "ng build routing",
+    "test:routing": "ng test routing --browsers=Firefox",
+    "test:routing:ci": "ng test routing --browsers=FirefoxHeadless --watch=false --code-coverage"
   },
   "private": true,
   "dependencies": {

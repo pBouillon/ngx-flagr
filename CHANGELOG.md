@@ -26,10 +26,17 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### **BREAKING CHANGES**
+
+- **routing:** introduce a new `@ngx-flagr/routing` package handling routing concerns
+- **core:** remove all code tackling routing concerns and move it to `@ngx-flagr/routing`
+
 ### Others
 
 - **meta:** add a condition to run the CI only when something in `projects/` has changed
 - **apps/docs-app:** showcase the contributors in a dedicated page
+- **apps/docs-app:** update the documentation to reflect separation of the routing into `@ngx-flagr/routing`
+- **meta:** update the publish script to publish any project of `@ngx-flagr` by passing its name as an argument
 
 ## [15.0.0-beta.1] - (2023-05-09)
 

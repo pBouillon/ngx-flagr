@@ -1,11 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 import { Route } from '@angular/router';
 
+import { FEATURE_FLAG_SERVICE, FeatureFlagService } from '@ngx-flagr/core';
 import { of } from 'rxjs';
 
+import { NgxFlagrRoutingConfiguration } from './config';
 import { FeatureFlagPreloadingStrategy } from './feature-flag-preloading-strategy';
-import { FeatureFlagService } from './feature-flag.service';
-import { CONFIGURATION, FEATURE_FLAG_SERVICE } from './tokens';
+import { CONFIGURATION } from './tokens';
 
 describe(FeatureFlagPreloadingStrategy.name, () => {
   let featureFlagServiceMock: jasmine.SpyObj<FeatureFlagService>;
@@ -22,11 +23,9 @@ describe(FeatureFlagPreloadingStrategy.name, () => {
         {
           provide: CONFIGURATION,
           useValue: {
-            routing: {
-              keys: { featureFlag: 'featureFlag' },
-              validIfNone: false,
-            },
-          },
+            keys: { featureFlag: 'featureFlag' },
+            validIfNone: false,
+          } as NgxFlagrRoutingConfiguration,
         },
       ],
     });
@@ -163,11 +162,9 @@ describe(FeatureFlagPreloadingStrategy.name, () => {
         {
           provide: CONFIGURATION,
           useValue: {
-            routing: {
-              keys: { featureFlag: 'featureFlag' },
-              validIfNone: true,
-            },
-          },
+            keys: { featureFlag: 'featureFlag' },
+            validIfNone: true,
+          } as NgxFlagrRoutingConfiguration,
         },
       ],
     }).runInInjectionContext(() => {

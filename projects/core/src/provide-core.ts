@@ -9,10 +9,10 @@ import {
 } from './tokens';
 
 /**
- * Provides the ngx-flagr dependencies.
+ * Provides the ngx-flagr dependencies
  *
- * @param {NgxFlagrOptions} options - The options to configure the dependencies.
- * @returns The dependencies for ngx-flagr.
+ * @param {NgxFlagrOptions} options - The options to configure the dependencies
+ * @returns The dependencies for ngx-flagr
  *
  * @usageNotes
  *

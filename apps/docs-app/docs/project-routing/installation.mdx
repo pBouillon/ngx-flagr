@@ -1,0 +1,141 @@
+---
+sidebar_position: 2
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Installation
+
+## Fetching the package
+
+Install `@ngx-flagr/routing` using the package manager of your choice:
+
+<Tabs defaultValue="npm" values={[
+  {label: 'npm', value: 'npm', },
+  {label: 'Yarn', value: 'yarn', },
+  {label: 'pnpm', value: 'pnpm', },
+]}>
+
+  <TabItem value="npm">
+
+```bash
+npm install @ngx-flagr/routing
+```
+
+  </TabItem>
+
+  <TabItem value="yarn">
+
+```bash
+yarn add @ngx-flagr/routing
+```
+
+  </TabItem>
+
+  <TabItem value="pnpm">
+
+```bash
+pnpm add @ngx-flagr/routing
+```
+
+  </TabItem>
+</Tabs>
+
+:::info
+
+`@ngx-flagr/routing` relies on functionalities provided by `@ngx-flagr/core`, be sure to have it [properly set up](../getting-started.mdx)
+
+:::
+
+## Initialization
+
+Once installed, provide it to your application. You can do so either by using the provider, favored for the standalone API, or the former way, in your `app.module.ts`:
+
+<Tabs defaultValue="main.ts" values={[
+  { label: 'Using providers', value: 'main.ts', },
+  { label: 'Using a module', value: 'app.module.ts', },
+]}>
+
+<TabItem value="main.ts">
+
+In the `main.ts` file, you can call `provideNgxFlagr` in the `providers` array
+and pass in which service should be used for the feature flags evaluation:
+
+```typescript title="main.ts"
+import { bootstrapApplication } from '@angular/platform-browser';
+
+import { provideNgxFlagr } from '@ngx-flagr/core';
+// highlight-next-line
+import { provideNgxFlagrRouting } from '@ngx-flagr/routing';
+
+import { AppComponent } from './app/app.component';
+import { CustomFeatureFlagService } from './app/custom-feature-flag.service';
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    // highlight-next-line
+    provideNgxFlagr({ featureFlagService: CustomFeatureFlagService }),
+    provideNgxFlagrRouting(),
+  ],
+}).catch(err => console.error(err));
+```
+
+</TabItem>
+
+<TabItem value="app.module.ts">
+
+```typescript title="app.module.ts"
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { NgxFlagrModule } from '@ngx-flagr/core';
+// highlight-next-line
+import { NgxFlagrRoutingModule } from '@ngx-flagr/routing';
+
+import { AppComponent } from './app.component';
+import { CustomFeatureFlagService } from './custom-feature-flag.service';
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    NgxFlagrModule.forRoot({ featureFlagService: CustomFeatureFlagService }),
+    // highlight-next-line
+    NgxFlagrRoutingModule.forRoot(),
+  ],
+  bootstrap: [AppComponent],
+})
+export class AppModule {}
+```
+
+</TabItem>
+</Tabs>
+
+## Customizing its behavior
+
+`@ngx-flagr/routing` provides a default configuration for its behavior that you can override for your needs.
+
+| Property | Type | Purpose | Default Value |
+|:---------|:----:|:--------|:-------------:|
+| `keys.featureFlag` | `string` | The key used to identify feature flags in the `data` property of Angular routes | `'featureFlag'` |
+| `keys.redirectToIfDisabled` | `string` | The key used to identify the route to which the user will be redirected in the `data` property of Angular routes | `'redirectToIfDisabled'` |
+| `redirectToIfDisabled` | <code>string &#124; null</code> | The name of a route to redirect to if the user does not have the feature flag enabled | `null` |
+| `validIfNone` | `boolean` | The value returned by the guard when no feature flags are defined for a route | `false` |
+
+:::note
+
+Here is the full default configuration:
+
+```ts
+const DEFAULT_ROUTING_CONFIGURATION: NgxFlagrRoutingConfiguration = {
+  keys: {
+    featureFlag: 'featureFlag',
+    redirectToIfDisabled: 'redirectToIfDisabled',
+  },
+  redirectToIfDisabled: null,
+  validIfNone: false,
+};
+```
+
+:::

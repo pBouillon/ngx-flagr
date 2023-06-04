@@ -1,9 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { Route, UrlTree } from '@angular/router';
 
+import { FEATURE_FLAG_SERVICE, FeatureFlagService } from '@ngx-flagr/core';
+
+import { NgxFlagrRoutingConfiguration } from './config';
 import { canMatchFeatureFlag } from './feature-flag.can-match.guard';
-import { FeatureFlagService } from './feature-flag.service';
-import { CONFIGURATION, FEATURE_FLAG_SERVICE } from './tokens';
+import { CONFIGURATION } from './tokens';
 
 describe('canMatchFeatureFlag', () => {
   let featureFlagServiceMock: jasmine.SpyObj<FeatureFlagService>;
@@ -22,10 +24,8 @@ describe('canMatchFeatureFlag', () => {
         {
           provide: CONFIGURATION,
           useValue: {
-            routing: {
-              keys: { featureFlag: 'featureFlag' },
-            },
-          },
+            keys: { featureFlag: 'featureFlag' },
+          } as NgxFlagrRoutingConfiguration,
         },
       ],
     }).runInInjectionContext(() => {
@@ -45,10 +45,8 @@ describe('canMatchFeatureFlag', () => {
         {
           provide: CONFIGURATION,
           useValue: {
-            routing: {
-              keys: { featureFlag: 'featureFlag' },
-            },
-          },
+            keys: { featureFlag: 'featureFlag' },
+          } as NgxFlagrRoutingConfiguration,
         },
       ],
     }).runInInjectionContext(() => {
@@ -70,11 +68,9 @@ describe('canMatchFeatureFlag', () => {
         {
           provide: CONFIGURATION,
           useValue: {
-            routing: {
-              keys: { featureFlag: 'featureFlag' },
-              validIfNone: false,
-            },
-          },
+            keys: { featureFlag: 'featureFlag' },
+            validIfNone: false,
+          } as NgxFlagrRoutingConfiguration,
         },
       ],
     }).runInInjectionContext(() => {
@@ -93,11 +89,9 @@ describe('canMatchFeatureFlag', () => {
         {
           provide: CONFIGURATION,
           useValue: {
-            routing: {
-              keys: { featureFlag: 'featureFlag' },
-              validIfNone: true,
-            },
-          },
+            keys: { featureFlag: 'featureFlag' },
+            validIfNone: true,
+          } as NgxFlagrRoutingConfiguration,
         },
       ],
     }).runInInjectionContext(() => {
@@ -116,10 +110,8 @@ describe('canMatchFeatureFlag', () => {
         {
           provide: CONFIGURATION,
           useValue: {
-            routing: {
-              keys: { featureFlag: 'featureFlag' },
-            },
-          },
+            keys: { featureFlag: 'featureFlag' },
+          } as NgxFlagrRoutingConfiguration,
         },
       ],
     }).runInInjectionContext(() => {
@@ -141,11 +133,9 @@ describe('canMatchFeatureFlag', () => {
         {
           provide: CONFIGURATION,
           useValue: {
-            routing: {
-              keys: { featureFlag: 'featureFlag' },
-              redirectToIfDisabled: 'rejected',
-            },
-          },
+            keys: { featureFlag: 'featureFlag' },
+            redirectToIfDisabled: 'rejected',
+          } as NgxFlagrRoutingConfiguration,
         },
       ],
     }).runInInjectionContext(() => {
@@ -168,14 +158,12 @@ describe('canMatchFeatureFlag', () => {
         {
           provide: CONFIGURATION,
           useValue: {
-            routing: {
-              keys: {
-                featureFlag: 'featureFlag',
-                redirectToIfDisabled: 'redirectToIfDisabled',
-              },
-              redirectToIfDisabled: 'rejected',
+            keys: {
+              featureFlag: 'featureFlag',
+              redirectToIfDisabled: 'redirectToIfDisabled',
             },
-          },
+            redirectToIfDisabled: 'rejected',
+          } as NgxFlagrRoutingConfiguration,
         },
       ],
     }).runInInjectionContext(() => {

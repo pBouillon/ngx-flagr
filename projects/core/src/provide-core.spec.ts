@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 
-import { FeatureFlagDirective } from './feature-flag.directive';
 import { FeatureFlagService } from './feature-flag.service';
-import { provideNgxFlagr } from './provide-ngx-flagr';
+import { provideNgxFlagr } from './provide-core';
 import { FEATURE_FLAG_SERVICE } from './tokens';
 
 @Injectable()

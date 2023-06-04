@@ -1,11 +1,11 @@
 import { inject, Injectable, isDevMode } from '@angular/core';
 import { PreloadingStrategy, Route } from '@angular/router';
 
+import { isFeatureFlag, FEATURE_FLAG_SERVICE } from '@ngx-flagr/core';
 import { from, Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { isFeatureFlag } from './feature-flag';
-import { CONFIGURATION, FEATURE_FLAG_SERVICE } from './tokens';
+import { CONFIGURATION } from './tokens';
 
 /**
  * A preloading strategy that uses feature flags to determine whether or not to
@@ -32,12 +32,11 @@ export class FeatureFlagPreloadingStrategy implements PreloadingStrategy {
    * @publicApi
    */
   preload(route: Route, load: () => Observable<any>): Observable<any> {
-    const { keys } = this._configuration.routing;
-    const featureFlag = route.data?.[keys.featureFlag];
+    const featureFlagKey = this._configuration.keys.featureFlag;
+    const featureFlag = route.data?.[featureFlagKey];
 
     if (!featureFlag) {
-      const { validIfNone } = this._configuration.routing;
-      if (validIfNone) {
+      if (this._configuration.validIfNone) {
         return load();
       }
 

@@ -23,45 +23,6 @@ resources:
 
 :::
 
-### Configuration
-
-This [PreloadingStrategy](https://angular.io/api/router/PreloadingStrategy)
-relies on the configuration provided to `ngx-flagr` on initialization under the
-`routing` key:
-
-```ts
-const options: NgxFlagrOptions = {
-  // ...
-  routing: {
-    keys: {
-      // Where to find the feature flag in the `Route`'s `data`
-      featureFlag: 'featureFlag',
-    },
-    // Whether the `Route` should be preloaded or not if no feature flag is found
-    validIfNone: false,
-  }
-};
-```
-
-:::info Default values and behavior
-
-If the `routing` section is not provided, the `FeatureFlagPreloadingStrategy`
-will attempt to retrieve the feature flags from the `featureFlag` property of
-the `Route`'s `data`.
-
-If none is found, it will note preload the associated `Route` if not specified
-otherwise.
-
-:::
-
-:::caution
-
-Both `routing.keys.featureFlag` and `routing.validIfNone` are also used by
-[`canMatchFeatureFlag`](./guards#canmatchfeatureflag) where they serve the same
-purpose (resolving feature flags and the behavior to adopt if none is found).
-
-:::
-
 ### Usage
 
 To use the `FeatureFlagPreloadingStrategy`, first specify the feature flag of
@@ -80,6 +41,17 @@ export const routes: Route[] = [
 ];
 ```
 
+:::info Default values and behavior
+
+If the `routing` section is not provided, the `FeatureFlagPreloadingStrategy`
+will attempt to retrieve the feature flags from the `featureFlag` property of
+the `Route`'s `data`.
+
+If none is found, it will not preload the associated `Route` if not specified
+otherwise.
+
+:::
+
 Then, provide the `FeatureFlagPreloadingStrategy` to the router's configuration:
 
 <Tabs defaultValue="main.ts" values={[
@@ -94,6 +66,9 @@ bootstrapApplication(AppComponent, {
   providers: [
     // highlight-next-line
     provideRouter(routes, withPreloading(FeatureFlagPreloadingStrategy)),
+
+    provideNgxFlagr({ featureFlagService: FeatureFlagService }),
+    provideNgxFlagrRouting(),
   ],
 });
 ```
@@ -107,6 +82,9 @@ bootstrapApplication(AppComponent, {
   imports: [
     // highlight-next-line
     RouterModule.forRoot(routes, { preloadingStrategy: FeatureFlagPreloadingStrategy }),
+
+    NgxFlagrModule.forRoot({ featureFlagService: FeatureFlagService }),
+    NgxFlagrRoutingModule.forRoot(),
   ],
 })
 export class AppModule { }
