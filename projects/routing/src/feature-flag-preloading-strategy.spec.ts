@@ -162,11 +162,9 @@ describe(FeatureFlagPreloadingStrategy.name, () => {
         {
           provide: CONFIGURATION,
           useValue: {
-            routing: {
-              keys: { featureFlag: 'featureFlag' },
-              validIfNone: true,
-            },
-          },
+            keys: { featureFlag: 'featureFlag' },
+            validIfNone: true,
+          } as NgxFlagrRoutingConfiguration,
         },
       ],
     }).runInInjectionContext(() => {
