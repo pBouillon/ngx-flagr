@@ -24,7 +24,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [15.0.0-beta.2] - (2023-06-04)
 
 ### **BREAKING CHANGES**
 
