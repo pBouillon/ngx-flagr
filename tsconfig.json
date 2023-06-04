@@ -13,10 +13,10 @@
     "sourceMap": true,
     "paths": {
       "@ngx-flagr/core": [
-        "./projects/core"
+        "dist/@ngx-flagr/core"
       ],
       "@ngx-flagr/routing": [
-        "./projects/routing"
+        "dist/@ngx-flagr/routing"
       ]
     },
     "declaration": false,
