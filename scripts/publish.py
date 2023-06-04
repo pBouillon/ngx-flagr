@@ -51,7 +51,7 @@ except subprocess.CalledProcessError as e:
 
 # Navigate to the library's build output directory
 log_debug("Navigating to the library's build output directory ...")
-lib_dir = os.path.join('dist', '@ngx-flagr', 'core')
+lib_dir = os.path.join('dist', '@ngx-flagr', project_name)
 if not os.path.isdir(lib_dir):
     error("Library output directory not found.")
 os.chdir(lib_dir)
@@ -72,11 +72,8 @@ except (FileNotFoundError, json.JSONDecodeError) as e:
 # Set the organization name
 org_name = '@ngx-flagr'
 
-# Set the library name
-library_name = 'core'
-
 # Set the library scope
-library_scope = f'{org_name}/{library_name}'
+library_scope = f'{org_name}/{project_name}'
 log_debug(f"Library scope: {library_scope}")
 
 # Set access to public
