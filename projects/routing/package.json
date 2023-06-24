@@ -1,6 +1,6 @@
 {
   "name": "@ngx-flagr/routing",
-  "version": "15.0.0-beta.2",
+  "version": "16.0.0",
   "description": "Routing utilities for ngx-flagr",
   "keywords": [
     "Angular",
@@ -24,10 +24,10 @@
   },
   "homepage": "https://github.com/pbouillon/ngx-flagr#readme",
   "peerDependencies": {
-    "@angular/common": "^15.2.0",
-    "@angular/core": "^15.2.0",
-    "@angular/router": "^15.2.0",
-    "@ngx-flagr/core": "file:../../dist/@ngx-flagr/core"
+    "@angular/common": "^16.1.2",
+    "@angular/core": "^16.1.2",
+    "@angular/router": "^16.1.2",
+    "@ngx-flagr/core": "^16.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"

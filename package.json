@@ -4,32 +4,30 @@
   "scripts": {
     "ng": "ng",
     "format": "prettier --write \"projects/**/*.{ts,html,scss}\"",
-
     "build:core": "ng build core",
     "test:core": "ng test core --browsers=Firefox",
     "test:core:ci": "ng test core --browsers=FirefoxHeadless --watch=false --code-coverage",
-
     "build:routing": "ng build routing",
     "test:routing": "ng test routing --browsers=Firefox",
     "test:routing:ci": "ng test routing --browsers=FirefoxHeadless --watch=false --code-coverage"
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^15.2.0",
-    "@angular/common": "^15.2.0",
-    "@angular/compiler": "^15.2.0",
-    "@angular/core": "^15.2.0",
-    "@angular/platform-browser": "^15.2.0",
-    "@angular/platform-browser-dynamic": "^15.2.0",
-    "@angular/router": "^15.2.0",
+    "@angular/animations": "^16.1.2",
+    "@angular/common": "^16.1.2",
+    "@angular/compiler": "^16.1.2",
+    "@angular/core": "^16.1.2",
+    "@angular/platform-browser": "^16.1.2",
+    "@angular/platform-browser-dynamic": "^16.1.2",
+    "@angular/router": "^16.1.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.12.0"
+    "zone.js": "~0.13.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^15.2.6",
-    "@angular/cli": "~15.2.6",
-    "@angular/compiler-cli": "^15.2.0",
+    "@angular-devkit/build-angular": "^16.1.1",
+    "@angular/cli": "~16.1.1",
+    "@angular/compiler-cli": "^16.1.2",
     "@types/jasmine": "~4.3.0",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.0",
@@ -37,7 +35,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
-    "ng-packagr": "^15.2.2",
+    "ng-packagr": "^16.1.0",
     "prettier": "^2.8.7",
     "typescript": "~4.9.4"
   }
