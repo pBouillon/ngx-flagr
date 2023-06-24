@@ -8,8 +8,11 @@
 # ngx-flagr
 
 [![CI](https://github.com/pBouillon/ngx-flagr/actions/workflows/ci.yml/badge.svg)](https://github.com/pBouillon/ngx-flagr/actions/workflows/ci.yml)
-[![npm](https://img.shields.io/npm/v/@ngx-flagr/core.svg)](https://www.npmjs.com/package/@ngx-flagr/core)
-[![npm](https://img.shields.io/npm/dt/@ngx-flagr/core)](https://www.npmjs.com/package/@ngx-flagr/core)
+
+> | Project | version | Downloads |
+> |:--------|:--------|:----------|
+> | [`@ngx-flagr/core`](https://pbouillon.github.io/ngx-flagr/docs/category/ngx-flagrcore) | [![npm](https://img.shields.io/npm/v/@ngx-flagr/core.svg)](https://www.npmjs.com/package/@ngx-flagr/core) | [![npm](https://img.shields.io/npm/dt/@ngx-flagr/core)](https://www.npmjs.com/package/@ngx-flagr/core) |
+> | [`@ngx-flagr/routing`](https://pbouillon.github.io/ngx-flagr/docs/category/ngx-flagrrouting) | [![npm](https://img.shields.io/npm/v/@ngx-flagr/routing.svg)](https://www.npmjs.com/package/@ngx-flagr/routing) | [![npm](https://img.shields.io/npm/dt/@ngx-flagr/core)](https://www.npmjs.com/package/@ngx-flagr/routing) |
 
 `ngx-flagr` is an Angular library that simplifies feature flag management by providing a set of classes that can be used to efficiently manage feature flags. With `ngx-flagr`, you can easily manage feature flags, target specific users or segments, and experiment with different variations of your app's features.
 
