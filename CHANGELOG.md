@@ -34,6 +34,7 @@ All notable changes to this project will be documented in this file.
 ### Others
 
 - **apps/docs-app:** add the new major version in the docs
+- **meta:** fix a CI step targeting `routing` that was named `core`
 
 ## [15.0.0-beta.2] - (2023-06-04)
 

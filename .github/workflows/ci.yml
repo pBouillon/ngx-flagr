@@ -38,7 +38,7 @@ jobs:
       - name: Test @ngx-flagr/core
         run: npm run test:core:ci
 
-      - name: Test @ngx-flagr/core
+      - name: Test @ngx-flagr/routing
         run: npm run test:routing:ci
 
       - name: Upload test results
