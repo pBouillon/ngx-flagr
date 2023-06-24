@@ -24,6 +24,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [16.0.0] - (2023-06-24)
+
+### **BREAKING CHANGES**
+
+- **core:** target Angular 16.0.0
+- **routing:** target Angular 16.0.0
+
+### Others
+
+- **apps/docs-app:** add the new major version in the docs
+
 ## [15.0.0-beta.2] - (2023-06-04)
 
 ### **BREAKING CHANGES**
