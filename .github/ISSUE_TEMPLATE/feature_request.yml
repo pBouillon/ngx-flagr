@@ -1,0 +1,33 @@
+name: 💡 Feature request
+description: Let us know anything that we can do better or that could benefit ngx-flagr
+title: "Feature request: <short description>"
+labels: ["request: feature"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for suggesting an idea to make ngx-flagr better.
+
+        Please complete the below form to ensure we have all the details to get things started.
+  - type: textarea
+    id: solution
+    attributes:
+      label: Idea
+      description: |
+        Please describe the desired behavior, pitch your idea, or suggest improvements
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives
+      description: |
+        Have you considered alternative solutions or implementations? Do you have an idea on how this should be implemented? Let us know!
+  - type: textarea
+    id: info
+    attributes:
+      label: Additional Info
+      description: |
+        Provide additional information or links to resources that can help with the creation of this command.
+    validations:
+      required: false
