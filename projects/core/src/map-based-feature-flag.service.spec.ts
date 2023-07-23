@@ -1,8 +1,4 @@
-import {
-  createFromEntries,
-  MapBasedFeatureFlagService,
-} from './map-based-feature-flag.service';
-
+import { MapBasedFeatureFlagService } from './map-based-feature-flag.service';
 import { FeatureFlagEvaluationResult } from './feature-flag';
 
 describe('MapBasedFeatureFlagService', () => {
@@ -39,7 +35,8 @@ describe('MapBasedFeatureFlagService', () => {
         feature2: false,
       };
 
-      const result = createFromEntries(featureFlagsData);
+      const result =
+        MapBasedFeatureFlagService.createFromEntries(featureFlagsData);
 
       expect(result).toBeInstanceOf(MapBasedFeatureFlagService);
 

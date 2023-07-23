@@ -25,6 +25,24 @@ export class MapBasedFeatureFlagService implements FeatureFlagService {
   }
 
   /**
+   * Creates a new instance of `MapBasedFeatureFlagService` from a Record of
+   * feature flag entries.
+   *
+   * @param {Record<string, FeatureFlagEvaluationResult>} entries - An object
+   * containing feature flags as keys and corresponding evaluation results.
+   * @returns {MapBasedFeatureFlagService} - A new instance of
+   * {@link MapBasedFeatureFlagService} initialized with the provided feature flag
+   * entries.
+   *
+   * @publicApi
+   */
+  static createFromEntries(
+    entries: Record<string, FeatureFlagEvaluationResult>
+  ): MapBasedFeatureFlagService {
+    return new MapBasedFeatureFlagService(entries);
+  }
+
+  /**
    * Checks if a specific feature flag is enabled.
    *
    * @param {FeatureFlag} featureFlag - The feature flag to check.
@@ -35,21 +53,3 @@ export class MapBasedFeatureFlagService implements FeatureFlagService {
     return this.#featureFlags.get(featureFlag) ?? false;
   }
 }
-
-/**
- * Creates a new instance of `MapBasedFeatureFlagService` from a Record of
- * feature flag entries.
- *
- * @param {Record<string, FeatureFlagEvaluationResult>} entries - An object
- * containing feature flags as keys and corresponding evaluation results.
- * @returns {MapBasedFeatureFlagService} - A new instance of
- * {@link MapBasedFeatureFlagService} initialized with the provided feature flag
- * entries.
- *
- * @publicApi
- */
-export const createFromEntries = (
-  entries: Record<string, FeatureFlagEvaluationResult>
-): MapBasedFeatureFlagService => {
-  return new MapBasedFeatureFlagService(entries);
-};
