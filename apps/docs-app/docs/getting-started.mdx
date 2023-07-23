@@ -55,13 +55,95 @@ pnpm add @ngx-flagr/core
 
 Once the library is installed all what's left is for us to configure it.
 
-### Providing a default `FeatureFlagService`
+You can do so either by using the provider, favored for the standalone API, or
+the former way, in your `app.module.ts`:
+
+<Tabs defaultValue="main.ts" values={[
+  { label: 'Using providers', value: 'main.ts', },
+  { label: 'Using a module', value: 'app.module.ts', },
+]}>
+
+<TabItem value="main.ts">
+
+In the `main.ts` file, you can call `provideNgxFlagr` in the `providers` array
+and pass in which service should be used for the feature flags evaluation:
+
+```typescript title="main.ts"
+import { bootstrapApplication } from '@angular/platform-browser';
+
+// highlight-next-line
+import { provideNgxFlagr, MapBasedFeatureFlagService } from '@ngx-flagr/core';
+
+import { AppComponent } from './app/app.component';
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    // highlight-next-line
+    provideNgxFlagr({
+      featureFlagService: MapBasedFeatureFlagService.createFromEntries({
+        'feature 1': true,
+        'feature 2': false,
+      }),
+    }),
+  ],
+});
+```
+
+</TabItem>
+
+<TabItem value="app.module.ts">
+
+```typescript title="app.module.ts"
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+// highlight-next-line
+import { NgxFlagrModule, MapBasedFeatureFlagService } from '@ngx-flagr/core';
+
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    // highlight-next-line
+    NgxFlagrModule.forRoot({
+      featureFlagService: MapBasedFeatureFlagService.createFromEntries({
+        'feature 1': true,
+        'feature 2': false,
+      }),
+    }),
+  ],
+  bootstrap: [AppComponent],
+})
+export class AppModule {}
+```
+
+</TabItem>
+</Tabs>
+
+:::info
+
+The `NgxFlagrOptions` also accepts a lambda to indicate which
+`FeatureFlagService` should be resolved:
+
+```typescript title="main.ts"
+const options: NgxFlagrOptions = {
+  featureFlagService: () => environment.useCustomService
+    ? CustomFeatureFlagService
+    : RegularFeatureFlagService,
+};
+```
+
+:::
+
+## Providing a custom `FeatureFlagService`
 
 For the feature flags evaluation, `ngx-flagr` based itself on a service
 dedicated to their evaluation.
 
-In order for the library to work, we will need to provide an implementation for
-it:
+If you would like to write your own way of evaluating the feature flags, you can
+write your own implementation of `FeatureFlagService`:
 
 ```ts title="custom-feature-flag.service.ts"
 import { Injectable } from '@angular/core';
@@ -86,13 +168,8 @@ A `FeatureFlag` is defined as:
 type FeatureFlag = string | string[];
 ```
 
-### Wiring everything up
-
-Once that we have an implementation of the `FeatureFlagService` to provide to
-the library, all is left is to wire it up.
-
-You can do so either by using the provider, favored for the standalone API, or
-the former way, in your `app.module.ts`:
+From here, you can provide it in the configuration so that `ngx-flagr` will use
+your own implementation:
 
 <Tabs defaultValue="main.ts" values={[
   { label: 'Using providers', value: 'main.ts', },
@@ -118,7 +195,7 @@ bootstrapApplication(AppComponent, {
     // highlight-next-line
     provideNgxFlagr({ featureFlagService: CustomFeatureFlagService }),
   ],
-}).catch(err => console.error(err));
+});
 ```
 
 </TabItem>
@@ -150,24 +227,9 @@ export class AppModule {}
 </TabItem>
 </Tabs>
 
-:::info
-
-The `NgxFlagrOptions` also accepts a lambda to indicate which
-`FeatureFlagService` should be resolved:
-
-```typescript title="main.ts"
-const options: NgxFlagrOptions = {
-  featureFlagService: () => environment.useCustomService
-    ? CustomFeatureFlagService
-    : RegularFeatureFlagService,
-};
-```
-
-:::
-
 ## Extending the library
 
-`@ngx-flagr/core` provides the basic functionality for evaluating and managing
+`@ngx-flagr/core` provides the basic functionalities for evaluating and managing
 feature flags in your application. However, you may want to extend the library
 to integrate with your specific feature flag provider or add additional
 functionality.
