@@ -1,4 +1,7 @@
-import { MapBasedFeatureFlagService } from './map-based-feature-flag.service';
+import {
+  createFromEntries,
+  MapBasedFeatureFlagService,
+} from './map-based-feature-flag.service';
 
 import { FeatureFlagEvaluationResult } from './feature-flag';
 
@@ -27,5 +30,21 @@ describe('MapBasedFeatureFlagService', () => {
 
   it('should return false for unknown feature flags', () => {
     expect(featureFlagService.isEnabled('unknownFeature')).toEqual(false);
+  });
+
+  describe('createFromEntries', () => {
+    it('should create a MapBasedFeatureFlagService instance with correct entries', () => {
+      const featureFlagsData: Record<string, FeatureFlagEvaluationResult> = {
+        feature1: true,
+        feature2: false,
+      };
+
+      const result = createFromEntries(featureFlagsData);
+
+      expect(result).toBeInstanceOf(MapBasedFeatureFlagService);
+
+      expect(result.isEnabled('feature1')).toEqual(true);
+      expect(result.isEnabled('feature2')).toEqual(false);
+    });
   });
 });
