@@ -78,13 +78,14 @@ import { AppComponent } from './app/app.component';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    // highlight-next-line
+    // highlight-start
     provideNgxFlagr({
       featureFlagService: MapBasedFeatureFlagService.createFromEntries({
         'feature 1': true,
         'feature 2': false,
       }),
     }),
+    // highlight-end
   ],
 });
 ```
@@ -106,13 +107,14 @@ import { AppComponent } from './app.component';
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    // highlight-next-line
+    // highlight-start
     NgxFlagrModule.forRoot({
       featureFlagService: MapBasedFeatureFlagService.createFromEntries({
         'feature 1': true,
         'feature 2': false,
       }),
     }),
+    // highlight-end
   ],
   bootstrap: [AppComponent],
 })
