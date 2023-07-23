@@ -1,4 +1,4 @@
-import { inject } from '@angular/core';
+import { inject, Type } from '@angular/core';
 
 import { NgxFlagrConfiguration } from './config';
 import { FeatureFlag, FeatureFlagEvaluationResult } from './feature-flag';
@@ -20,5 +20,13 @@ export interface FeatureFlagService {
 export function createFeatureFlagService({
   featureFlagService,
 }: NgxFlagrConfiguration): FeatureFlagService {
-  return inject(featureFlagService);
+  const isDelegate = featureFlagService instanceof Function;
+  const isGenericType = 'prototype' in featureFlagService;
+
+  const provided =
+    isDelegate && !isGenericType
+      ? (<Function>featureFlagService)()
+      : featureFlagService;
+
+  return provided instanceof Type ? inject(provided) : provided;
 }
