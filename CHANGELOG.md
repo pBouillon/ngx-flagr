@@ -24,6 +24,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [16.1.0] - *Unreleased*
+
+### Features
+
+- **core:** the configuration now accepts an instance or a delegate creating an
+  instance of a `FeatureFlagService`
+- **core:** add a `MapBasedFeatureFlagService` that can be used out of the box
+
+### Others
+
+- **core:** add a `FeatureFlagEvaluationResult` type to wrap the results of a
+  feature flag evaluation, such as `boolean`, `Promise<boolean>`
+  or `Observable<boolean>`
+
 ## [16.0.0] - (2023-06-24)
 
 ### **BREAKING CHANGES**
