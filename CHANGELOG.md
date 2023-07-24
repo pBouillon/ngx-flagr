@@ -24,7 +24,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [16.1.0] - *Unreleased*
+## [16.1.0] - (2023-07-24)
 
 ### Features
 
