@@ -37,6 +37,7 @@ All notable changes to this project will be documented in this file.
 - **core:** add a `FeatureFlagEvaluationResult` type to wrap the results of a
   feature flag evaluation, such as `boolean`, `Promise<boolean>`
   or `Observable<boolean>`
+- **apps/demo-app:** create a demo app based on the local version of the library
 
 ## [16.0.0] - (2023-06-24)
 
