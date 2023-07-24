@@ -1,9 +1,6 @@
 import { Component, Injectable } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 
-import { FeatureFlag } from './feature-flag';
-import { FeatureFlagDirective } from './feature-flag.directive';
 import { FeatureFlagService } from './feature-flag.service';
 import { NgxFlagrModule } from './ngx-flagr.module';
 import { FEATURE_FLAG_SERVICE } from './tokens';

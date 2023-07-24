@@ -12,6 +12,8 @@ export interface NgxFlagrConfiguration {
    * reference to such a class.
    */
   featureFlagService:
+    | FeatureFlagService
+    | (() => FeatureFlagService)
     | Type<FeatureFlagService>
     | (() => Type<FeatureFlagService>);
 }

@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "format": "prettier --write \"projects/**/*.{ts,html,scss}\"",
+    "demo": "ng serve demo-app",
     "build:core": "ng build core",
     "test:core": "ng test core --browsers=Firefox",
     "test:core:ci": "ng test core --browsers=FirefoxHeadless --watch=false --code-coverage",
