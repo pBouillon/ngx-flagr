@@ -1,6 +1,6 @@
 {
   "name": "@ngx-flagr/core",
-  "version": "16.0.0",
+  "version": "16.1.0",
   "description": "An Angular library providing directives, services and more to ease the usage of feature flags in Angular",
   "keywords": [
     "Angular",
