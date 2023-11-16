@@ -24,6 +24,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [17.0.0] - (2023-11-16)
+
+### **BREAKING CHANGES**
+
+- **core:** target Angular 17
+- **routing:** target Angular 17
+
 ## [16.1.0] - (2023-07-24)
 
 ### Features
